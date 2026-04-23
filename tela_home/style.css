@@ -61,14 +61,38 @@ video {
     text-align: center;
 }
 
-.img-bola2008 {
+.img-sporting-base {
     width: 400px;
     height: 300px;
     margin-left: 20px;
 }
 
+.img-sporting {
+    width: 400px;
+    height: 300px;
+    margin-right: 20px;
+}
+
+.img-manchester2003 {
+    width: 400px;
+    height: 300px;
+    margin-left: 20px;
+}
+
+.img-bola2008 {
+    width: 400px;
+    height: 300px;
+    margin-right: 20px;
+}
+
 .img-champions2008 {
     width: 400px;
+    height: 300px;
+    margin-left: 20px;
+}
+
+.img-real2009 {
+    width: 500px;
     height: 300px;
     margin-right: 20px;
 }
