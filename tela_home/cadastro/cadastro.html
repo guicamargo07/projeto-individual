@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <!DOCTYPE html>
+    <html lang="pt-br">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Cadastro</title>
+        <link rel="stylesheet" href="cadastro.css">
+    </head>
+
+<body>
+
+    <div class="container">
+        <form class="formulario">
+            <h2>Cadastro</h2>
+
+            <input type="text" id="input_nome" placeholder="Nome">
+            <div id="mensagemnome"></div>
+
+            <input type="email" id="input_email" placeholder="Email">
+            <div id="mensagememail"></div>
+
+            <div>
+                <label><input type="radio" name="sexo" value="masculino"> Masculino</label>
+                <label><input type="radio" name="sexo" value="feminino"> Feminino</label>
+            </div>
+            <div id="mensagemsexo"></div>
+
+            <input type="password" id="input_senha" placeholder="Senha" oninput="validarSenha()">
+            <div id="mensagemsenha"></div>
+
+            <button type="button" onclick="cadastrar()">Cadastrar</button>
+        </form>
+    </div>
+
+</body>
+
+</html>
+
+<script>
+
+function validarSenha() {
+    let senha = input_senha.value;
+
+    let temMinuscula = false;
+    let temMaiuscula = false;
+    let temNumero = false;
+    let temEspecial = false;
+
+    let mensagem = "";
+    
+    if (senha.length === 0) {
+        input_senha.dataset.forte = "false";
+        mensagemsenha.innerHTML = `<span style="color:red">*Digite uma senha</span>`;
+        return;
+    }
+
+    for (let i = 0; i < senha.length; i++) {
+        let char = senha[i];
+
+        if (char >= 'a' && char <= 'z') temMinuscula = true;
+        else if (char >= 'A' && char <= 'Z') temMaiuscula = true;
+        else if (char >= '0' && char <= '9') temNumero = true;
+        else temEspecial = true;
+    }
+
+    if (senha.length < 8) mensagem += "• 8 caracteres<br>";
+    if (!temMinuscula) mensagem += "• letra minúscula<br>";
+    if (!temMaiuscula) mensagem += "• letra maiúscula<br>";
+    if (!temNumero) mensagem += "• número<br>";
+    if (!temEspecial) mensagem += "• caractere especial<br>";
+
+    if (mensagem === "") {
+        input_senha.dataset.forte = "true";
+        mensagemsenha.innerHTML = `<span style="color:green">Senha forte</span>`;
+    } else {
+        input_senha.dataset.forte = "false";
+        mensagemsenha.innerHTML = `<span style="color:red">${mensagem}</span>`;
+    }
+}
+
+
+function cadastrar() {
+    let nome = input_nome.value;
+    let email = input_email.value;
+    let sexoSelecionado = document.querySelector("input[name='sexo']:checked");
+    let senha = input_senha.value;
+
+    let contadorValidacoes = 0;
+
+    if (nome.length < 3) {
+        mensagemnome.innerHTML = `<span style="color:red">*Nome inválido</span>`;
+    } else {
+        mensagemnome.innerHTML = ``;
+        contadorValidacoes++;
+    }
+
+    if (!email.includes("@") || !email.includes(".com")) {
+        mensagememail.innerHTML = `<span style="color:red">*Email inválido</span>`;
+    } else {
+        mensagememail.innerHTML = ``;
+        contadorValidacoes++;
+    }
+
+    if (sexoSelecionado == null) {
+        mensagemsexo.innerHTML = `<span style="color:red">*Selecione o sexo</span>`;
+    } else {
+        mensagemsexo.innerHTML = ``;
+        contadorValidacoes++;
+    }
+
+    if (senha.length === 0) {
+        mensagemsenha.innerHTML = `<span style="color:red">*Digite uma senha</span>`;
+    }
+    else if (input_senha.dataset.forte != "true") {
+        mensagemsenha.innerHTML = `<span style="color:red">*Senha precisa ser forte</span>`;
+    }
+    else {
+        contadorValidacoes++;
+    }
+
+    if (contadorValidacoes == 4) {
+        alert("Cadastro realizado com sucesso!");
+    }
+}
+
+</script>
