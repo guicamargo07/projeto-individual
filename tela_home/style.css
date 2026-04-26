@@ -1,19 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 body {
-    background-color: white;
     margin: 0;
     padding: 0;
     font-family: "Montserrat", sans-serif;
-    padding-bottom: 100px;
 }
 
 .container_header {
-    height: fit-content; 
-    width: 100%; 
+    height: fit-content;
+    width: 100%;
     display: flex;
     justify-content: space-between;
-    list-style-type: none;
+    background-color:#111;
+    padding: 10px 0px; 
 }
 
 .img-logo {
@@ -22,10 +21,21 @@ body {
     margin-left: 20px;
 }
 
+.btn-perfil {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
 .img-perfil {
     width: 70px;
     height: 60px;
+    transition: 0.3s;
     margin-right: 20px;
+}
+
+.btn-perfil:hover .img-perfil {
+    transform: scale(1.1);
 }
 
 video {
@@ -61,59 +71,161 @@ video {
     text-align: center;
 }
 
+.img-carteirinha {
+    width: 450px;
+    height: 350px;
+    margin-left: 20px;
+}
+
+.img-andorinha-base {
+    width: 450px;
+    height: 350px;
+    margin-right: 20px;
+}
+
 .img-sporting-base {
-    width: 400px;
-    height: 300px;
+    width: 450px;
+    height: 350px;
     margin-left: 20px;
 }
 
 .img-sporting {
-    width: 400px;
-    height: 300px;
+    width: 450px;
+    height: 350px;
     margin-right: 20px;
 }
 
 .img-manchester2003 {
-    width: 400px;
-    height: 300px;
+    width: 450px;
+    height: 350px;
     margin-left: 20px;
 }
 
 .img-bola2008 {
-    width: 400px;
-    height: 300px;
+    width: 450px;
+    height: 350px;
     margin-right: 20px;
 }
 
 .img-champions2008 {
-    width: 400px;
-    height: 300px;
+    width: 500px;
+    height: 400px;
     margin-left: 20px;
 }
 
 .img-real2009 {
     width: 500px;
-    height: 300px;
+    height: 350px;
     margin-right: 20px;
 }
 
+.img-bola2013 {
+    width: 500px;
+    height: 350px;
+    margin-left: 20px;
+}
+.img-champions2014 {
+    width: 500px;
+    height: 400px;
+    margin-left: 20px;
+}
+
+.img-bola2014 {
+    width: 500px;
+    height: 450px;
+    margin-right: 20px;
+}
+
+.img-champions2014 {
+    width: 500px;
+    height: 400px;
+    margin-left: 20px;
+}
+
+.img-champions2016 {
+    width: 500px;
+    height: 400px;
+    margin-right: 20px;
+}
+
+.img-bola2016 {
+    width: 500px;
+    height: 400px;
+    margin-left: 20px;
+}
+
 .img-euro2016 {
-    width: 400px;
-    height: 300px;
+    width: 500px;
+    height: 400px;
+    margin-right: 20px;
+}
+
+.img-champions2017 {
+    width: 500px;
+    height: 350px;
     margin-left: 20px;
 }
 
 .img-bola2017 {
-    width: 500px;
-    height: 300px;
+    width: 400px;
+    height: 400px;
     margin-right: 20px;
 }
 
 .img-champions2018 {
     width: 500px;
+    height: 350px;
+    margin-left: 20px;
+}
+
+.img-anuncio-juve {
+    width: 500px;
+    height: 300px;
+    margin-right: 20px;
+}
+
+.img-nations2019 {
+    width: 500px;
+    height: 400px;
+    margin-left: 20px;
+}
+
+.img-juve {
+    width: 500px;
+    height: 300px;
+    margin-right: 20px;
+}
+
+.img-manchester2021 {
+    width: 500px;
+    height: 350px;
+    margin-left: 20px;
+}
+
+.img-alnassr {
+    width: 500px;
+    height: 300px;
+    margin-right: 20px;
+}
+
+.img-nations2025 {
+    width: 500px;
     height: 300px;
     margin-left: 20px;
 }
+
+.img-2026 {
+    width: 500px;
+    height: 350px;
+    margin-right: 20px;
+}
+
+.img-legado {
+    width: 500px;
+    height: 450px;
+    margin-left: 20px;
+}
+
 
 .container_conteudo {
     height: fit-content; 
@@ -137,3 +249,54 @@ video {
 .bloco-invertido {
     flex-direction: row-reverse;
 }
+
+.footer {
+    background-color: #111;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+}
+
+.footer .redes {
+    margin-top: 10px;
+}
+
+.footer .redes a {
+    color: white;
+    font-size: 24px;
+    margin: 0 10px;
+    transition: 0.3s;
+}
+
+.footer .redes a:hover {
+    color: darkcyan;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+.texto {
+    color: black;
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+     line-height: 1.5;
+}
+
+img {
+    border-radius: 30px;
+}
+
