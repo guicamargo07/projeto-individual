@@ -10,6 +10,9 @@
 <body>
 
     <div class="container">
+        <div class="logo">
+                <img src="../img/cr7-logo.png" alt="Logo">
+            </div>
         <form class="formulario">
             <h2>Cadastro</h2>
 
@@ -34,6 +37,11 @@
             <div id="mensagemconfirmar"></div>
 
             <button type="button" onclick="cadastrar()">Cadastrar</button>
+
+            <p class="link-login">
+                Já possui uma conta?
+                <a href="../login/login.html">Faça login</a>
+            </p>
         </form>
     </div>
 
@@ -135,6 +143,7 @@
 
         if (contadorValidacoes == 5) {
             alert("Cadastro realizado com sucesso!");
+            location.href = "../login/login.html"
         }
     }
 

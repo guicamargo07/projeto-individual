@@ -1,0 +1,74 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #e5e5e5;
+}
+
+.container {
+    width: 900px;
+    margin: 40px auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.card {
+    background: #f0f0f0;
+    border: 1px solid #ccc;
+}
+
+.card h3 {
+    background: #0b2a4a;
+    color: white;
+    margin: 0;
+    padding: 8px 10px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.conteudo {
+    display: flex;
+}
+
+/* IMAGEM PREMIO */
+.imagem {
+    width: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-right: 1px solid #ccc;
+}
+
+.imagem img {
+    width: 70px;
+}
+
+.lista {
+    flex: 1;
+    padding: 10px;
+}
+
+.linha {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+/* ANO */
+.linha span {
+    width: 45px;
+    font-weight: bold;
+}
+
+/* LOGO TIME */
+.linha img {
+    width: 20px;
+    height: 20px;
+}
+
+/* TEXTO */
+.linha p {
+    margin: 0;
+    font-size: 13px;
+}

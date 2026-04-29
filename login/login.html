@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="logo">
+            <img src="../img/cr7-logo.png" alt="Logo">
+        </div>
+        <form class="formulario">
+            <h2>Login</h2>
+
+            <input type="email" id="input_email" placeholder="Email">
+            <div id="mensagememail"></div>
+
+            <input type="password" id="input_senha" placeholder="Senha">
+            <div id="mensagemsenha"></div>
+
+            <button type="button" onclick="login()">Entrar</button>
+
+            <p class="link-cadastro">
+                Não possui uma conta?
+                <a href="../cadastro/cadastro.html">Cadastre-se aqui</a>
+            </p>
+        </form>
+    </div>
+
+</body>
+
+</html>
+
+<script>
+function login() {
+    let email = input_email.value;
+    let senha = input_senha.value;
+
+    let validacoes = 0;
+
+    if (!email.includes("@") || !email.includes(".com")) {
+        mensagememail.innerHTML = `<span style="color:red">*Email inválido</span>`;
+    } else {
+        mensagememail.innerHTML = "";
+        validacoes++;
+    }
+
+    if (senha.length === 0) {
+        mensagemsenha.innerHTML = `<span style="color:red">*Digite a senha</span>`;
+    } else {
+        mensagemsenha.innerHTML = "";
+        validacoes++;
+    }
+
+    if (validacoes == 2) {
+        alert("Login válido (simulação)");
+    }
+}
+</script>
