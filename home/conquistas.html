@@ -1,205 +1,499 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
-<meta charset="UTF-8">
-<title>Conquistas</title>
-<link rel="stylesheet" href="conquistas.css">
+    <meta charset="UTF-8">
+    <title>Conquistas</title>
+    <link rel="stylesheet" href="conquistas.css">
 </head>
 
 <body>
 
-<div class="container">
+    <div class="container_header">
+        <img src="../img/cr7-logo.png" class="img-logo">
 
-    <div class="card">
-        <h3>3X THE BEST FIFA</h3>
+        <div class="navegador">
+            <button class="btn-home" onclick="home()">Home</button>
+            <button class="btn-desempenho" onclick="desempenho()">Desempenho</button>
 
-        <div class="conteudo">
-            <div class="imagem">
-                <img src="../img/the-best.png">
-            </div>
+            <div class="perfil-container">
+                <button class="btn-perfil" onclick="toggleMenu()">
+                    <img src="../img/avatar-login.png" class="img-perfil">
+                </button>
 
-            <div class="lista">
-                <div class="linha">
-                    <span>2017</span>
-                    <img src="../img/real.png">
-                    <p>Real Madrid CF</p>
-                </div>
-
-                <div class="linha">
-                    <span>2016</span>
-                    <img src="../img/real.png">
-                    <p>Real Madrid CF</p>
-                </div>
-
-                <div class="linha">
-                    <span>2008</span>
-                    <img src="../img/united.png">
-                    <p>Manchester United FC</p>
+                <div id="menuPerfil" class="menu-perfil">
+                    <button onclick="logout(event)">Encerrar sessão</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="card">
-        <h3>5X BOLA DE OURO</h3>
+    <div class="container">
 
-        <div class="conteudo">
-            <div class="imagem">
-                <img src="../img/bola-de-ouro.png">
-            </div>
+        <div class="card">
+            <h3>3X THE BEST FIFA</h3>
 
-            <div class="lista">
-                <div class="linha"><span>2017</span><img src="../img/real.png"><p>Real Madrid CF</p></div>
-                <div class="linha"><span>2016</span><img src="../img/real.png"><p>Real Madrid CF</p></div>
-                <div class="linha"><span>2014</span><img src="../img/real.png"><p>Real Madrid CF</p></div>
-                <div class="linha"><span>2013</span><img src="../img/real.png"><p>Real Madrid CF</p></div>
-                <div class="linha"><span>2008</span><img src="../img/united.png"><p>Manchester United FC</p></div>
-            </div>
-        </div>
-    </div>
+            <div class="conteudo">
+                <div class="imagem">
+                    <img src="../img/the-best.png">
+                </div>
 
-    <div class="card">
-        <h3>4X MELHOR JOGADOR DA EUROPA</h3>
+                <div class="lista">
+                    <div class="linha">
+                        <span>2017</span>
+                        <img src="../img/real.png">
+                        <p>Real Madrid CF</p>
+                    </div>
 
-        <div class="conteudo">
-            <div class="imagem">
-                <img src="../img/melhor-da-europa.png">
-            </div>
+                    <div class="linha">
+                        <span>2016</span>
+                        <img src="../img/real.png">
+                        <p>Real Madrid CF</p>
+                    </div>
 
-            <div class="lista">
-                <div class="linha"><span>2017</span><img src="../img/real.png"><p>Real Madrid CF</p></div>
-                <div class="linha"><span>2016</span><img src="../img/real.png"><p>Real Madrid CF</p></div>
-                <div class="linha"><span>2014</span><img src="../img/real.png"><p>Real Madrid CF</p></div>
-                <div class="linha"><span>2008</span><img src="../img/united.png"><p>Manchester United FC</p></div>
+                    <div class="linha">
+                        <span>2008</span>
+                        <img src="../img/united.png">
+                        <p>Manchester United FC</p>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="card">
-        <h3>4X CHUTEIRA DE OURO</h3>
+        <div class="card">
+            <h3>5X BOLA DE OURO</h3>
 
-        <div class="conteudo">
-            <div class="imagem">
-                <img src="../img/chuteira-de-ouro.png">
-            </div>
+            <div class="conteudo">
+                <div class="imagem">
+                    <img src="../img/bola-de-ouro.png">
+                </div>
 
-            <div class="lista">
-                <div class="linha"><span>14/15</span><img src="../img/real.png"><p>Real Madrid CF - 48 gols</p></div>
-                <div class="linha"><span>13/14</span><img src="../img/real.png"><p>Real Madrid CF - 31 gols</p></div>
-                <div class="linha"><span>10/11</span><img src="../img/real.png"><p>Real Madrid CF - 41 gols</p></div>
-                <div class="linha"><span>07/08</span><img src="../img/united.png"><p>Manchester United FC - 31 gols</p></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="card">
-        <h3>1X PUSKÁS</h3>
-
-        <div class="conteudo">
-            <div class="imagem">
-                <img src="../img/puskas.png">
-            </div>
-
-            <div class="lista">
-                <div class="linha"><span>2009</span><img src="../img/united.png"><p>Manchester United FC</p></div>
+                <div class="lista">
+                    <div class="linha"><span>2017</span><img src="../img/real.png">
+                        <p>Real Madrid CF</p>
+                    </div>
+                    <div class="linha"><span>2016</span><img src="../img/real.png">
+                        <p>Real Madrid CF</p>
+                    </div>
+                    <div class="linha"><span>2014</span><img src="../img/real.png">
+                        <p>Real Madrid CF</p>
+                    </div>
+                    <div class="linha"><span>2013</span><img src="../img/real.png">
+                        <p>Real Madrid CF</p>
+                    </div>
+                    <div class="linha"><span>2008</span><img src="../img/united.png">
+                        <p>Manchester United FC</p>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="card">
-        <h3>1X EURO COPA</h3>
+        <div class="card">
+            <h3>4X MELHOR JOGADOR DA EUROPA</h3>
 
-        <div class="conteudo">
-            <div class="imagem">
-                <img src="../img/euro.png">
-            </div>
+            <div class="conteudo">
+                <div class="imagem">
+                    <img src="../img/melhor-da-europa.png">
+                </div>
 
-            <div class="lista">
-                <div class="linha"><span>2016</span><img src="../img/portugal.png"><p>Portugal</p></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="card">
-        <h3>5X CHAMPIONS LEAGUE</h3>
-
-        <div class="conteudo">
-            <div class="imagem">
-                <img src="../img/champions.png">
-            </div>
-
-            <div class="lista">
-                <div class="linha"><span>17/18</span><img src="../img/real.png"><p>Real Madrid CF</p></div>
-                <div class="linha"><span>16/17</span><img src="../img/real.png"><p>Real Madrid CF</p></div>
-                <div class="linha"><span>15/16</span><img src="../img/real.png"><p>Real Madrid CF</p></div>
-                <div class="linha"><span>13/14</span><img src="../img/real.png"><p>Real Madrid CF</p></div>
-                <div class="linha"><span>07/08</span><img src="../img/united.png"><p>Manchester United FC</p></div>
+                <div class="lista">
+                    <div class="linha"><span>2017</span><img src="../img/real.png">
+                        <p>Real Madrid CF</p>
+                    </div>
+                    <div class="linha"><span>2016</span><img src="../img/real.png">
+                        <p>Real Madrid CF</p>
+                    </div>
+                    <div class="linha"><span>2014</span><img src="../img/real.png">
+                        <p>Real Madrid CF</p>
+                    </div>
+                    <div class="linha"><span>2008</span><img src="../img/united.png">
+                        <p>Manchester United FC</p>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="card">
-        <h3>3X PREMIER LEAGUE</h3>
+        <div class="card">
+            <h3>4X CHUTEIRA DE OURO</h3>
 
-        <div class="conteudo">
-            <div class="imagem">
-                <img src="../img/premier.png">
-            </div>
+            <div class="conteudo">
+                <div class="imagem">
+                    <img src="../img/chuteira-de-ouro.png">
+                </div>
 
-            <div class="lista">
-                <div class="linha"><span>08/09</span><img src="../img/united.png"><p>Manchester United FC</p></div>
-                <div class="linha"><span>07/08</span><img src="../img/united.png"><p>Manchester United FC</p></div>
-                <div class="linha"><span>06/07</span><img src="../img/united.png"><p>Manchester United FC</p></div>
-            </div>
-        </div>
-    </div>
-
-     <div class="card">
-        <h3>2X LA LIGA</h3>
-
-        <div class="conteudo">
-            <div class="imagem">
-                <img src="../img/espanhol.png">
-            </div>
-
-            <div class="lista">
-                <div class="linha"><span>16/17</span><img src="../img/real.png"><p>Real Madrid CF</p></div>
-                <div class="linha"><span>11/12</span><img src="../img/real.png"><p>Real Madrid CF</p></div>
+                <div class="lista">
+                    <div class="linha"><span>14/15</span><img src="../img/real.png">
+                        <p>Real Madrid CF - 48 gols</p>
+                    </div>
+                    <div class="linha"><span>13/14</span><img src="../img/real.png">
+                        <p>Real Madrid CF - 31 gols</p>
+                    </div>
+                    <div class="linha"><span>10/11</span><img src="../img/real.png">
+                        <p>Real Madrid CF - 41 gols</p>
+                    </div>
+                    <div class="linha"><span>07/08</span><img src="../img/united.png">
+                        <p>Manchester United FC - 31 gols</p>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
 
-     <div class="card">
-        <h3>2X SÉRIE A</h3>
+        <div class="card">
+            <h3>1X PUSKÁS</h3>
 
-        <div class="conteudo">
-            <div class="imagem">
-                <img src="../img/italiano.png">
-            </div>
+            <div class="conteudo">
+                <div class="imagem">
+                    <img src="../img/puskas.png">
+                </div>
 
-            <div class="lista">
-                <div class="linha"><span>19/20</span><img src="../img/juve.png"><p>Juventus FC</p></div>
-                <div class="linha"><span>18/19</span><img src="../img/juve.png"><p>Juventus FC</p></div>
-            </div>
-        </div>
-    </div>
-
-     <div class="card">
-        <h3>2X SUPERCOPA DA UEFA</h3>
-
-        <div class="conteudo">
-            <div class="imagem">
-                <img src="../img/taca-uefa.png">
-            </div>
-
-            <div class="lista">
-                <div class="linha"><span>17/18</span><img src="../img/real.png"><p>Real Madrid CF</p></div>
-                <div class="linha"><span>14/15</span><img src="../img/real.png"><p>Real Madrid CF</p></div>
+                <div class="lista">
+                    <div class="linha"><span>2009</span><img src="../img/united.png">
+                        <p>Manchester United FC</p>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
 
-</div>
+        <div class="card">
+            <h3>1X EURO COPA</h3>
+
+            <div class="conteudo">
+                <div class="imagem">
+                    <img src="../img/euro.png">
+                </div>
+
+                <div class="lista">
+                    <div class="linha"><span>2016</span><img src="../img/portugal.png">
+                        <p>Portugal</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>5X CHAMPIONS LEAGUE</h3>
+
+            <div class="conteudo">
+                <div class="imagem">
+                    <img src="../img/champions.png">
+                </div>
+
+                <div class="lista">
+                    <div class="linha"><span>17/18</span><img src="../img/real.png">
+                        <p>Real Madrid CF</p>
+                    </div>
+                    <div class="linha"><span>16/17</span><img src="../img/real.png">
+                        <p>Real Madrid CF</p>
+                    </div>
+                    <div class="linha"><span>15/16</span><img src="../img/real.png">
+                        <p>Real Madrid CF</p>
+                    </div>
+                    <div class="linha"><span>13/14</span><img src="../img/real.png">
+                        <p>Real Madrid CF</p>
+                    </div>
+                    <div class="linha"><span>07/08</span><img src="../img/united.png">
+                        <p>Manchester United FC</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>3X PREMIER LEAGUE</h3>
+
+            <div class="conteudo">
+                <div class="imagem">
+                    <img src="../img/premier.png">
+                </div>
+
+                <div class="lista">
+                    <div class="linha"><span>08/09</span><img src="../img/united.png">
+                        <p>Manchester United FC</p>
+                    </div>
+                    <div class="linha"><span>07/08</span><img src="../img/united.png">
+                        <p>Manchester United FC</p>
+                    </div>
+                    <div class="linha"><span>06/07</span><img src="../img/united.png">
+                        <p>Manchester United FC</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>2X LA LIGA</h3>
+
+            <div class="conteudo">
+                <div class="imagem">
+                    <img src="../img/espanhol.png">
+                </div>
+
+                <div class="lista">
+                    <div class="linha"><span>16/17</span><img src="../img/real.png">
+                        <p>Real Madrid CF</p>
+                    </div>
+                    <div class="linha"><span>11/12</span><img src="../img/real.png">
+                        <p>Real Madrid CF</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>2X SÉRIE A</h3>
+
+            <div class="conteudo">
+                <div class="imagem">
+                    <img src="../img/italiano.png">
+                </div>
+
+                <div class="lista">
+                    <div class="linha"><span>19/20</span><img src="../img/juve.png">
+                        <p>Juventus FC</p>
+                    </div>
+                    <div class="linha"><span>18/19</span><img src="../img/juve.png">
+                        <p>Juventus FC</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>2X SUPERCOPA DA UEFA</h3>
+
+            <div class="conteudo">
+                <div class="imagem">
+                    <img src="../img/taca-uefa.png">
+                </div>
+
+                <div class="lista">
+                    <div class="linha"><span>17/18</span><img src="../img/real.png">
+                        <p>Real Madrid CF</p>
+                    </div>
+                    <div class="linha"><span>14/15</span><img src="../img/real.png">
+                        <p>Real Madrid CF</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>2X NATIONS LEAGUE</h3>
+
+            <div class="conteudo">
+                <div class="imagem">
+                    <img src="../img/nations.png">
+                </div>
+
+                <div class="lista">
+                    <div class="linha"><span>2025</span><img src="../img/portugal.png">
+                        <p>Portugal</p>
+                    </div>
+                    <div class="linha"><span>2019</span><img src="../img/portugal.png">
+                        <p>Portugal</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>4X MUNDIAL DE CLUBES</h3>
+
+            <div class="conteudo">
+                <div class="imagem">
+                    <img src="../img/mundial.png">
+                </div>
+
+                <div class="lista">
+                    <div class="linha"><span>2018</span><img src="../img/real.png">
+                        <p>Real Madrid CF</p>
+                    </div>
+                    <div class="linha"><span>2017</span><img src="../img/real.png">
+                        <p>Real Madrid CF</p>
+                    </div>
+                    <div class="linha"><span>2015</span><img src="../img/real.png">
+                        <p>Real Madrid CF</p>
+                    </div>
+                    <div class="linha"><span>2009</span><img src="../img/united.png">
+                        <p>Manchester United FC</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>1X COPA DA INGLATERRA</h3>
+
+            <div class="conteudo">
+                <div class="imagem">
+                    <img src="../img/taca-inglaterra.png">
+                </div>
+
+                <div class="lista">
+                    <div class="linha"><span>2004</span><img src="../img/united.png">
+                        <p>Manchester United FC</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>2X COPA DEL REY</h3>
+
+            <div class="conteudo">
+                <div class="imagem">
+                    <img src="../img/taca-espanha.png">
+                </div>
+
+                <div class="lista">
+                    <div class="linha"><span>13/14</span><img src="../img/real.png">
+                        <p>Real Madrid CF</p>
+                    </div>
+                    <div class="linha"><span>10/11</span><img src="../img/real.png">
+                        <p>Real Madrid CF</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>1X COPPA ITALIA</h3>
+
+            <div class="conteudo">
+                <div class="imagem">
+                    <img src="../img/taca-italia.png">
+                </div>
+
+                <div class="lista">
+                    <div class="linha"><span>20/21</span><img src="../img/juve.png">
+                        <p>Juventus FC</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>2X SUPERCOPA DA ITÁLIA</h3>
+
+            <div class="conteudo">
+                <div class="imagem">
+                    <img src="../img/supertaca-italia.png">
+                </div>
+
+                <div class="lista">
+                    <div class="linha"><span>20/21</span><img src="../img/juve.png">
+                        <p>Juventus FC</p>
+                    </div>
+                    <div class="linha"><span>18/19</span><img src="../img/juve.png">
+                        <p>Juventus FC</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>2X SUPERCOPA DA ESPANHA</h3>
+
+            <div class="conteudo">
+                <div class="imagem">
+                    <img src="../img/supertaca-espanha.png">
+                </div>
+
+                <div class="lista">
+                    <div class="linha"><span>17/18</span><img src="../img/real.png">
+                        <p>Real Madrid CF</p>
+                    </div>
+                    <div class="linha"><span>12/13</span><img src="../img/real.png">
+                        <p>Real Madrid CF</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>2X COPA DA LIGA INGLESA</h3>
+
+            <div class="conteudo">
+                <div class="imagem">
+                    <img src="../img/taca-daliga-inglaterra.png">
+                </div>
+
+                <div class="lista">
+                    <div class="linha"><span>2009</span><img src="../img/united.png">
+                        <p>Manchester United FC</p>
+                    </div>
+                    <div class="linha"><span>2006</span><img src="../img/united.png">
+                        <p>Manchester United FC</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>1X SUPERCOPA DA INGLATERRA</h3>
+
+            <div class="conteudo">
+                <div class="imagem">
+                    <img src="../img/supertaca-inglaterra.png">
+                </div>
+
+                <div class="lista">
+                    <div class="linha"><span>07/08</span><img src="../img/united.png">
+                        <p>Manchester United FC</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>1X SUPERTAÇA DE PORTUGAL</h3>
+
+            <div class="conteudo">
+                <div class="imagem">
+                    <img src="../img/supertaca-portugal.png">
+                </div>
+
+                <div class="lista">
+                    <div class="linha"><span>2003</span><img src="../img/sporting.png">
+                        <p>Sporting CP</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 
 </body>
+
 </html>
+
+<script>
+    function home() {
+        location.href = "home.html";
+    }
+
+    function desempenho() {
+        location.href = "desempenho.html";
+    }
+
+    function toggleMenu() {
+        let menu = document.getElementById("menuPerfil");
+
+        if (menu.style.display === "block") {
+            menu.style.display = "none";
+        } else {
+            menu.style.display = "block";
+        }
+    }
+
+    function logout(event) {
+        event.stopPropagation();
+        location.href = "../login/login.html";
+    }
+
+    window.onclick = function (event) {
+        if (!event.target.closest('.perfil-container')) {
+            document.getElementById("menuPerfil").style.display = "none";
+        }
+    }
+</script>

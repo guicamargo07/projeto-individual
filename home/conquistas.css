@@ -4,9 +4,95 @@ body {
     background-color: #e5e5e5;
 }
 
+.container_header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #111;
+    padding: 10px 0;
+}
+
+.img-logo {
+    width: 100px;
+    height: 60px;
+    margin-left: 20px;
+    border-radius: 10px;
+}
+
+.navegador {
+    display: flex;
+    align-items: center;
+}
+
+.btn-home,
+.btn-desempenho {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 17px;
+    cursor: pointer;
+    margin-right: 20px;
+    transition: 0.3s;
+}
+
+.btn-home:hover,
+.btn-desempenho:hover {
+    color: gold;
+    transform: scale(1.05);
+}
+
+.btn-perfil {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.img-perfil {
+    width: 60px;
+    margin-right: 20px;
+    transition: 0.3s;
+    border-radius: 50%;
+}
+
+.btn-perfil:hover .img-perfil {
+    transform: scale(1.1);
+}
+
+.perfil-container {
+    position: relative;
+}
+
+.menu-perfil {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translateY(70px);
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    display: none;
+    min-width: 150px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+}
+
+.menu-perfil button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    text-align: left;
+}
+
+.menu-perfil button:hover {
+    background-color: #f1f1f1;
+}
+
 .container {
     width: 900px;
-    margin: 40px auto;
+    margin: 120px auto 40px auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px;
