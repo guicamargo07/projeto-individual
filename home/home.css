@@ -16,6 +16,8 @@ body {
     align-items: center;
     background-color: #111;
     padding: 10px 0;
+    position: relative;
+    z-index: 1000;
 }
 
 .img-logo {
@@ -44,6 +46,38 @@ body {
 
 .btn-perfil:hover .img-perfil {
     transform: scale(1.1);
+}
+
+.perfil-container {
+    position: relative;
+}
+
+.menu-perfil {
+    position: absolute;
+    top: 0; 
+    right: 0;
+    transform: translateY(70px);
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    display: none;
+    min-width: 150px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    z-index: 1001;
+}
+
+.menu-perfil button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    text-align: left;
+    display: block;
+}
+
+.menu-perfil button:hover {
+    background-color: #f1f1f1;
 }
 
 .btn-desempenho {
@@ -79,6 +113,7 @@ body {
 video {
     width: 100%;
     min-height: 100vh;
+     pointer-events: none;
 
 }
 
