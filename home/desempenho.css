@@ -59,6 +59,37 @@ body {
     transform: scale(1.1);
 }
 
+.perfil-container {
+    position: relative;
+}
+
+.menu-perfil {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translateY(70px);
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    display: none;
+    min-width: 150px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    z-index: 1001;
+}
+
+.menu-perfil button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    text-align: left;
+}
+
+.menu-perfil button:hover {
+    background-color: #f1f1f1;
+}
+
 .tabela-container {
     width: 1400px;
     margin: 120px auto 0 auto; 

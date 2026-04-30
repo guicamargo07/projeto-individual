@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <title>Desempenho Geral</title>
@@ -8,127 +9,154 @@
 
 <body>
 
-<div class="container_header">
-    <img src="../img/cr7-logo.png" class="img-logo">
+    <div class="container_header">
+        <img src="../img/cr7-logo.png" class="img-logo">
 
-    <div class="navegador">
-        <button class="btn-home" onclick="home()">Home</button>
-        <button class="btn-conquistas" onclick="conquistas()">Conquistas</button>
+        <div class="navegador">
+            <button class="btn-home" onclick="home()">Home</button>
+            <button class="btn-conquistas" onclick="conquistas()">Conquistas</button>
 
-        <button class="btn-perfil">
-            <img src="../img/avatar-login.png" class="img-perfil">
-        </button>
+            <div class="perfil-container">
+                <button class="btn-perfil" onclick="toggleMenu()">
+                    <img src="../img/avatar-login.png" class="img-perfil">
+                </button>
+
+                <div id="menuPerfil" class="menu-perfil">
+                    <button onclick="logout(event)">Encerrar sessão</button>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
 
-<div class="tabela-container">
-    <h2>DESEMPENHO POR CLUBES E SELEÇÃO</h2>
+    <div class="tabela-container">
+        <h2>DESEMPENHO POR CLUBES E SELEÇÃO</h2>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Equipe</th>
-                <th>Partidas</th>
-                <th>Gols</th>
-                <th>Assistências</th>
-            </tr>
-        </thead>
+        <table>
+            <thead>
+                <tr>
+                    <th>Equipe</th>
+                    <th>Partidas</th>
+                    <th>Gols</th>
+                    <th>Assistências</th>
+                </tr>
+            </thead>
 
-        <tbody>
-            <tr>
-                <td>
-                    <div class="clube">
-                        <img src="../img/real.png">
-                        <span>Real Madrid</span>
-                    </div>
-                </td>
-                <td>438</td>
-                <td>450</td>
-                <td>131</td>
-            </tr>
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="clube">
+                            <img src="../img/real.png">
+                            <span>Real Madrid</span>
+                        </div>
+                    </td>
+                    <td>438</td>
+                    <td>450</td>
+                    <td>131</td>
+                </tr>
 
-            <tr>
-                <td>
-                    <div class="clube">
-                        <img src="../img/united.png">
-                        <span>Man Utd</span>
-                    </div>
-                </td>
-                <td>346</td>
-                <td>145</td>
-                <td>73</td>
-            </tr>
+                <tr>
+                    <td>
+                        <div class="clube">
+                            <img src="../img/united.png">
+                            <span>Man Utd</span>
+                        </div>
+                    </td>
+                    <td>346</td>
+                    <td>145</td>
+                    <td>73</td>
+                </tr>
 
-            <tr>
-                <td>
-                    <div class="clube">
-                        <img src="../img/alnassr.png">
-                        <span>Al-Nassr</span>
-                    </div>
-                </td>
-                <td>136</td>
-                <td>119</td>
-                <td>23</td>
-            </tr>
+                <tr>
+                    <td>
+                        <div class="clube">
+                            <img src="../img/alnassr.png">
+                            <span>Al-Nassr</span>
+                        </div>
+                    </td>
+                    <td>137</td>
+                    <td>120</td>
+                    <td>23</td>
+                </tr>
 
-            <tr>
-                <td>
-                    <div class="clube">
-                        <img src="../img/juve.png">
-                        <span>Juventus</span>
-                    </div>
-                </td>
-                <td>134</td>
-                <td>101</td>
-                <td>28</td>
-            </tr>
+                <tr>
+                    <td>
+                        <div class="clube">
+                            <img src="../img/juve.png">
+                            <span>Juventus</span>
+                        </div>
+                    </td>
+                    <td>134</td>
+                    <td>101</td>
+                    <td>28</td>
+                </tr>
 
-            <tr>
-                <td>
-                    <div class="clube">
-                        <img src="../img/sporting.png">
-                        <span>Sporting</span>
-                    </div>
-                </td>
-                <td>31</td>
-                <td>5</td>
-                <td>6</td>
-            </tr>
+                <tr>
+                    <td>
+                        <div class="clube">
+                            <img src="../img/sporting.png">
+                            <span>Sporting</span>
+                        </div>
+                    </td>
+                    <td>31</td>
+                    <td>5</td>
+                    <td>6</td>
+                </tr>
 
-            <tr>
-                <td>
-                    <div class="clube">
-                        <img src="../img/portugal.png">
-                        <span>Portugal</span>
-                    </div>
-                </td>
-                <td>244</td>
-                <td>149</td>
-                <td>46</td>
-            </tr>
-        </tbody>
+                <tr>
+                    <td>
+                        <div class="clube">
+                            <img src="../img/portugal.png">
+                            <span>Portugal</span>
+                        </div>
+                    </td>
+                    <td>244</td>
+                    <td>149</td>
+                    <td>46</td>
+                </tr>
+            </tbody>
 
-        <tfoot>
-            <tr>
-                <td>Total</td>
-                <td>1329</td>
-                <td>969</td>
-                <td>307</td>
-            </tr>
-        </tfoot>
-    </table>
-</div>
+            <tfoot>
+                <tr>
+                    <td>Total</td>
+                    <td>1330</td>
+                    <td>970</td>
+                    <td>307</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
 
-<!-- SCRIPT -->
-<script>
-    function home() {
-        location.href = "home.html";
-    }
+    <script>
+        function home() {
+            location.href = "home.html";
+        }
 
-    function conquistas() {
-        location.href = "conquistas.html";
-    }
-</script>
+        function conquistas() {
+            location.href = "conquistas.html";
+        }
+
+        function toggleMenu() {
+            let menu = document.getElementById("menuPerfil");
+
+            if (menu.style.display === "block") {
+                menu.style.display = "none";
+            } else {
+                menu.style.display = "block";
+            }
+        }
+
+        function logout(event) {
+            event.stopPropagation();
+            location.href = "../login/login.html";
+        }
+
+        window.onclick = function (event) {
+            if (!event.target.closest('.perfil-container')) {
+                document.getElementById("menuPerfil").style.display = "none";
+            }
+        }
+    </script>
 
 </body>
+
 </html>
