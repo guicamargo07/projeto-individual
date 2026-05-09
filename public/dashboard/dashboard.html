@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Usuários</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; font-family: Arial, sans-serif; }
+
+        body {
+            background:#0b0d16;
+            color:#eef1ff;
+            min-height:100vh;
+        }
+
+        .main {
+            padding:20px;
+            max-width:1200px;
+            margin:0 auto;
+        }
+
+        .top {
+            margin-bottom:20px;
+        }
+
+        .kpis {
+            display:grid;
+            grid-template-columns:repeat(4,1fr);
+            gap:15px;
+            margin-bottom:20px;
+        }
+
+        .kpi {
+            background:#131728;
+            padding:15px;
+            border-radius:10px;
+        }
+
+        .kpi h3 { font-size:12px; color:#5a6490; }
+        .kpi p { font-size:22px; margin-top:5px; }
+
+        .graficos {
+            display:grid;
+            grid-template-columns:2fr 1fr;
+            gap:20px;
+            align-items:start;
+        }
+
+        .card {
+            background:#131728;
+            padding:15px;
+            border-radius:10px;
+        }
+
+        .chart-box {
+            height:260px;
+            margin-bottom:20px;
+        }
+
+        .pie-box {
+            height:220px;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+
+        canvas {
+            width:100% !important;
+            height:100% !important;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="main">
+
+    <div class="top">
+        <h2>Dashboard de Usuários</h2>
+        <p>Cadastro e distribuição por gênero</p>
+    </div>
+
+    <!-- KPIS -->
+    <div class="kpis">
+        <div class="kpi">
+            <h3>Total Usuários</h3>
+            <p id="kpiTotal">0</p>
+        </div>
+        <div class="kpi">
+            <h3>Masculino</h3>
+            <p id="kpiMasc">0</p>
+        </div>
+        <div class="kpi">
+            <h3>Feminino</h3>
+            <p id="kpiFem">0</p>
+        </div>
+        <div class="kpi">
+            <h3>Não informado</h3>
+            <p id="kpiOutros">0</p>
+        </div>
+    </div>
+
+    <!-- GRÁFICOS -->
+    <div class="graficos">
+
+        <div class="card">
+            <h3>Cadastros por mês</h3>
+            <div class="chart-box">
+                <canvas id="graficoMensal"></canvas>
+            </div>
+
+            <h3>Cadastros por gênero/mês</h3>
+            <div class="chart-box">
+                <canvas id="graficoGeneroMes"></canvas>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Distribuição de gênero</h3>
+
+            <div class="pie-box">
+                <canvas id="graficoPizza"></canvas>
+            </div>
+
+            <div id="resumoGenero"></div>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+let chart1, chart2, chart3;
+
+function carregarDashboard() {
+
+    let meses = ['Jan','Fev','Mar','Abr','Mai'];
+
+    let dadosTotal = [80,90,100,120,110];
+    let dadosMasc  = [40,45,50,60,55];
+    let dadosFem   = [30,35,40,45,40];
+    let dadosOut   = [10,10,10,15,15];
+
+    let total = dadosMasc.at(-1) + dadosFem.at(-1) + dadosOut.at(-1);
+    let masc = dadosMasc.at(-1);
+    let fem = dadosFem.at(-1);
+    let outros = dadosOut.at(-1);
+
+    document.getElementById("kpiTotal").innerHTML = total;
+    document.getElementById("kpiMasc").innerHTML = masc;
+    document.getElementById("kpiFem").innerHTML = fem;
+    document.getElementById("kpiOutros").innerHTML = outros;
+
+    document.getElementById("resumoGenero").innerHTML = `
+        <div style="margin-top:10px; font-size:14px; color:#5a6490">
+            Total de usuários cadastrados: <b style="color:#eef1ff">${total}</b>
+        </div>
+    `;
+
+    if(chart1) chart1.destroy();
+    if(chart2) chart2.destroy();
+    if(chart3) chart3.destroy();
+
+    // CADASTROS POR MÊS
+    chart1 = new Chart(document.getElementById("graficoMensal"), {
+        type:"bar",
+        data:{
+            labels: meses,
+            datasets:[{
+                label:"Cadastros",
+                data: dadosTotal,
+                backgroundColor:'#2272e8'
+            }]
+        },
+        options:{
+            responsive:true,
+            maintainAspectRatio:false,
+            plugins:{
+                tooltip:{
+                    callbacks:{
+                        label:(ctx)=>` ${ctx.raw} usuários`
+                    }
+                }
+            }
+        }
+    });
+
+    // CADASTRO POR GÊNERO / MÊS
+    chart2 = new Chart(document.getElementById("graficoGeneroMes"), {
+        type:"bar",
+        data:{
+            labels: meses,
+            datasets:[
+                { label:"Masculino", data:dadosMasc, backgroundColor:'#2272e8' },
+                { label:"Feminino", data:dadosFem, backgroundColor:'#c8d8f5' },
+                { label:"Não informado", data:dadosOut, backgroundColor:'#f5c518' }
+            ]
+        },
+        options:{
+            responsive:true,
+            maintainAspectRatio:false,
+            plugins:{
+                tooltip:{
+                    enabled:true,
+                    mode:'index',
+                    intersect:false
+                },
+                legend:{ position:'top' }
+            },
+            interaction:{
+                mode:'index',
+                intersect:false
+            }
+        }
+    });
+
+    // PIZZA
+    chart3 = new Chart(document.getElementById("graficoPizza"), {
+        type:"doughnut",
+        data:{
+            labels:["Masculino","Feminino","Não informado"],
+            datasets:[{
+                data:[masc,fem,outros],
+                backgroundColor:['#2272e8','#c8d8f5','#f5c518']
+            }]
+        },
+        options:{
+            responsive:true,
+            maintainAspectRatio:false,
+            cutout:'70%',
+            plugins:{
+                tooltip:{
+                    callbacks:{
+                        label:(ctx)=>{
+                            let val = ctx.raw;
+                            let perc = ((val/total)*100).toFixed(1);
+                            return `${ctx.label}: ${val} (${perc}%)`;
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
+carregarDashboard();
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,371 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Montserrat", sans-serif;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.container_header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #111;
+    padding: 10px 0;
+    position: relative;
+    z-index: 1000;
+}
+
+.img-logo {
+    width: 100px;
+    height: 60px;
+    margin-left: 20px;
+    border-radius: 10px;
+}
+
+.navegador {
+    display: flex;
+}
+
+.btn-perfil {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.img-perfil {
+    width: 60px;
+    margin-right: 20px;
+    transition: 0.3s;
+    border-radius: 50%;
+}
+
+.btn-perfil:hover .img-perfil {
+    transform: scale(1.1);
+}
+
+.perfil-container {
+    position: relative;
+}
+
+.menu-perfil {
+    position: absolute;
+    top: 0; 
+    right: 0;
+    transform: translateY(70px);
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    display: none;
+    min-width: 150px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    z-index: 1001;
+}
+
+.menu-perfil button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    text-align: left;
+    display: block;
+}
+
+.menu-perfil button:hover {
+    background-color: #f1f1f1;
+}
+
+.btn-desempenho {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 17px;
+    cursor: pointer;
+    margin-right: 20px;
+    transition: 0.3s;
+}
+
+.btn-desempenho:hover {
+    color: gold;
+    transform: scale(1.05);
+}
+
+.btn-conquistas {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 17px;
+    cursor: pointer;
+    margin-right: 20px;
+    transition: 0.3s;
+}
+
+.btn-conquistas:hover {
+    color: gold;
+    transform: scale(1.05);
+}
+
+video {
+    width: 100%;
+    min-height: 100vh;
+     pointer-events: none;
+
+}
+
+.capa {
+    position: absolute;
+    bottom: 20%;
+    left: 5%;
+    top: 50%;
+    width: 40%;
+    z-index: 3;
+}
+
+.capa-titulo {
+    color: white;
+    font-size: 80px;
+    margin-bottom: 5px;
+    font-weight: bold;
+
+}
+
+.capa-descricao {
+    color: white;
+    font-size: 20px;
+}
+
+.titulo {
+    color: black;
+    text-align: center;
+}
+
+.img-carteirinha {
+    width: 450px;
+    height: 350px;
+    margin-left: 20px;
+}
+
+.img-andorinha-base {
+    width: 450px;
+    height: 350px;
+    margin-right: 20px;
+}
+
+.img-sporting-base {
+    width: 450px;
+    height: 350px;
+    margin-left: 20px;
+}
+
+.img-sporting {
+    width: 450px;
+    height: 350px;
+    margin-right: 20px;
+}
+
+.img-manchester2003 {
+    width: 450px;
+    height: 350px;
+    margin-left: 20px;
+}
+
+.img-bola2008 {
+    width: 450px;
+    height: 350px;
+    margin-right: 20px;
+}
+
+.img-champions2008 {
+    width: 500px;
+    height: 400px;
+    margin-left: 20px;
+}
+
+.img-real2009 {
+    width: 500px;
+    height: 350px;
+    margin-right: 20px;
+}
+
+.img-bola2013 {
+    width: 500px;
+    height: 350px;
+    margin-left: 20px;
+}
+
+.img-champions2014 {
+    width: 500px;
+    height: 400px;
+    margin-left: 20px;
+}
+
+.img-bola2014 {
+    width: 500px;
+    height: 450px;
+    margin-right: 20px;
+}
+
+.img-champions2016 {
+    width: 500px;
+    height: 400px;
+    margin-right: 20px;
+}
+
+.img-bola2016 {
+    width: 500px;
+    height: 400px;
+    margin-left: 20px;
+}
+
+.img-euro2016 {
+    width: 500px;
+    height: 400px;
+    margin-right: 20px;
+}
+
+.img-champions2017 {
+    width: 500px;
+    height: 350px;
+    margin-left: 20px;
+}
+
+.img-bola2017 {
+    width: 400px;
+    height: 400px;
+    margin-right: 20px;
+}
+
+.img-champions2018 {
+    width: 500px;
+    height: 350px;
+    margin-left: 20px;
+}
+
+.img-anuncio-juve {
+    width: 500px;
+    height: 300px;
+    margin-right: 20px;
+}
+
+.img-nations2019 {
+    width: 500px;
+    height: 400px;
+    margin-left: 20px;
+}
+
+.img-juve {
+    width: 500px;
+    height: 300px;
+    margin-right: 20px;
+}
+
+.img-manchester2021 {
+    width: 500px;
+    height: 350px;
+    margin-left: 20px;
+}
+
+.img-alnassr {
+    width: 500px;
+    height: 300px;
+    margin-right: 20px;
+}
+
+.img-nations2025 {
+    width: 500px;
+    height: 300px;
+    margin-left: 20px;
+}
+
+.img-2026 {
+    width: 500px;
+    height: 350px;
+    margin-right: 20px;
+}
+
+.img-legado {
+    width: 500px;
+    height: 450px;
+    margin-left: 20px;
+}
+
+
+.container_conteudo {
+    height: fit-content;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.bloco {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+@keyframes aparecer{
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+        filter: blur (10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+        filter: blur (0px);
+    }
+}
+
+#aparecer {
+    animation: aparecer linear;
+    animation-timeline: view();
+    animation-range: entry 0%;
+}
+
+.bloco-invertido {
+    flex-direction: row-reverse;
+}
+
+.footer {
+    background-color: #111;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+}
+
+.footer .redes {
+    margin-top: 10px;
+}
+
+.footer .redes a {
+    color: white;
+    font-size: 24px;
+    margin: 0 10px;
+    transition: 0.3s;
+}
+
+.footer .redes a:hover {
+    color: darkcyan;
+}
+
+.texto {
+    color: black;
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    line-height: 1.5;
+    max-width: 400px;
+}
+
+img {
+    border-radius: 30px;
+}
