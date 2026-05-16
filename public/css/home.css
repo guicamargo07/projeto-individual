@@ -18,6 +18,7 @@ body {
     padding: 10px 0;
     position: relative;
     z-index: 1000;
+    margin-bottom: 0;
 }
 
 .img-logo {
@@ -29,55 +30,6 @@ body {
 
 .navegador {
     display: flex;
-}
-
-.btn-perfil {
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
-.img-perfil {
-    width: 60px;
-    margin-right: 20px;
-    transition: 0.3s;
-    border-radius: 50%;
-}
-
-.btn-perfil:hover .img-perfil {
-    transform: scale(1.1);
-}
-
-.perfil-container {
-    position: relative;
-}
-
-.menu-perfil {
-    position: absolute;
-    top: 0; 
-    right: 0;
-    transform: translateY(70px);
-    background: white;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    display: none;
-    min-width: 150px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    z-index: 1001;
-}
-
-.menu-perfil button {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    background: none;
-    cursor: pointer;
-    text-align: left;
-    display: block;
-}
-
-.menu-perfil button:hover {
-    background-color: #f1f1f1;
 }
 
 .btn-desempenho {
@@ -110,18 +62,35 @@ body {
     transform: scale(1.05);
 }
 
+.btn-sair {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 17px;
+    cursor: pointer;
+    margin-right: 20px;
+    transition: 0.3s;
+}
+
+.btn-sair:hover {
+    color: gold;
+    transform: scale(1.05);
+}
+
 video {
     width: 100%;
     min-height: 100vh;
-     pointer-events: none;
-
+    pointer-events: none;
+    display: block;
+    margin: 0;
+    padding: 0;
+    margin-top: -52px;
 }
 
 .capa {
     position: absolute;
-    bottom: 20%;
     left: 5%;
-    top: 50%;
+    top:35%;
     width: 40%;
     z-index: 3;
 }
@@ -290,7 +259,7 @@ video {
 
 .img-legado {
     width: 500px;
-    height: 450px;
+    height: 400px;
     margin-left: 20px;
 }
 
@@ -309,7 +278,7 @@ video {
     gap: 20px;
 }
 
-@keyframes aparecer{
+@keyframes aparecer {
     from {
         opacity: 0;
         transform: scale(0.8);
