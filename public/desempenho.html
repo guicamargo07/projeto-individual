@@ -13,18 +13,9 @@
         <img src="./assets/img/cr7-logo.png" class="img-logo">
 
         <div class="navegador">
-            <button class="btn-home" onclick="home()">Home</button>
+            <button class="btn-home" onclick="home()">Trajetória</button>
             <button class="btn-conquistas" onclick="conquistas()">Conquistas</button>
-
-            <div class="perfil-container">
-                <button class="btn-perfil" onclick="toggleMenu()">
-                    <img src="./assets/img/avatar-login.png" class="img-perfil">
-                </button>
-
-                <div id="menuPerfil" class="menu-perfil">
-                    <button onclick="logout(event)">Encerrar sessão</button>
-                </div>
-            </div>
+            <button class="btn-sair" onclick="logout()">Sair</button>
         </div>
     </div>
 
@@ -41,122 +32,74 @@
                 </tr>
             </thead>
 
-            <tbody>
-                <tr>
-                    <td>
-                        <div class="clube">
-                            <img src="./assets/img/real.png">
-                            <span>Real Madrid</span>
-                        </div>
-                    </td>
-                    <td>438</td>
-                    <td>450</td>
-                    <td>131</td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <div class="clube">
-                            <img src="./assets/img/united.png">
-                            <span>Man Utd</span>
-                        </div>
-                    </td>
-                    <td>346</td>
-                    <td>145</td>
-                    <td>73</td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <div class="clube">
-                            <img src="./assets/img/alnassr.png">
-                            <span>Al-Nassr</span>
-                        </div>
-                    </td>
-                    <td>138</td>
-                    <td>121</td>
-                    <td>23</td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <div class="clube">
-                            <img src="./assets/img/juve.png">
-                            <span>Juventus</span>
-                        </div>
-                    </td>
-                    <td>134</td>
-                    <td>101</td>
-                    <td>28</td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <div class="clube">
-                            <img src="./assets/img/sporting.png">
-                            <span>Sporting</span>
-                        </div>
-                    </td>
-                    <td>31</td>
-                    <td>5</td>
-                    <td>6</td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <div class="clube">
-                            <img src="./assets/img/portugal.png">
-                            <span>Portugal</span>
-                        </div>
-                    </td>
-                    <td>244</td>
-                    <td>149</td>
-                    <td>46</td>
-                </tr>
+            <tbody id="corpoTabela">
+                <!-- preenchido pelo JS -->
             </tbody>
 
             <tfoot>
                 <tr>
                     <td>Total</td>
-                    <td>1331</td>
-                    <td>971</td>
-                    <td>307</td>
+                    <td id="totalPartidas"></td>
+                    <td id="totalGols"></td>
+                    <td id="totalAssistencias"></td>
                 </tr>
             </tfoot>
         </table>
     </div>
 
-    <script>
-        function home() {
-            location.href = "./home.html";
-        }
-
-        function conquistas() {
-            location.href = "./conquistas.html";
-        }
-
-        function toggleMenu() {
-            let menu = document.getElementById("menuPerfil");
-
-            if (menu.style.display === "block") {
-                menu.style.display = "none";
-            } else {
-                menu.style.display = "block";
-            }
-        }
-
-        function logout(event) {
-            event.stopPropagation();
-            location.href = "./login.html";
-        }
-
-        window.onclick = function (event) {
-            if (!event.target.closest('.perfil-container')) {
-                document.getElementById("menuPerfil").style.display = "none";
-            }
-        }
-    </script>
-
 </body>
 
 </html>
+
+<script>
+    const logos = {
+        'Real Madrid': './assets/img/real.png',
+        'Man Utd':     './assets/img/united.png',
+        'Al-Nassr':    './assets/img/alnassr.png',
+        'Juventus':    './assets/img/juve.png',
+        'Sporting':    './assets/img/sporting.png',
+        'Portugal':    './assets/img/portugal.png'
+    };
+
+    async function carregarDesempenho() {
+        const resposta = await fetch('http://localhost:3333/desempenho');
+        const dados    = await resposta.json();
+
+        const tbody = document.getElementById('corpoTabela');
+        tbody.innerHTML = '';
+
+        dados.forEach(d => {
+            tbody.innerHTML += `
+                <tr>
+                    <td>
+                        <div class="clube">
+                            <img src="${logos[d.nome] || ''}">
+                            <span>${d.nome}</span>
+                        </div>
+                    </td>
+                    <td>${d.partidas}</td>
+                    <td>${d.gols}</td>
+                    <td>${d.assistencias}</td>
+                </tr>
+            `;
+        });
+
+        document.getElementById('totalPartidas').textContent     = dados.reduce((s, d) => s + d.partidas,     0);
+        document.getElementById('totalGols').textContent         = dados.reduce((s, d) => s + d.gols,         0);
+        document.getElementById('totalAssistencias').textContent = dados.reduce((s, d) => s + d.assistencias, 0);
+    }
+
+    function home() {
+        location.href = "./home.html";
+    }
+
+    function conquistas() {
+        location.href = "./conquistas.html";
+    }
+
+    function logout() {
+        location.href = "./login.html";
+    }
+
+    carregarDesempenho();
+</script>
