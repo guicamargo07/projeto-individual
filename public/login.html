@@ -3,19 +3,26 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Cadastro</title>
-    <link rel="icon" type="image/png" href="./assets/img/cr7-logo.png"> 
-    <link rel="stylesheet" href="./css/cadastro.css">
+    <title>Login</title>
+
+    <link rel="icon" type="image/png" href="./assets/img/cr7-logo.png">
+    <link rel="stylesheet" href="./css/login.css">
 </head>
 
 <body>
 
+    <button class="btn-voltar" onclick="voltar()">
+        Voltar
+    </button>
+
     <div class="container">
+
         <div class="logo">
             <img src="./assets/img/cr7-logo.png" alt="Logo">
         </div>
 
         <form class="formulario">
+
             <h2>Login</h2>
 
             <input type="email" id="input_email" placeholder="Email">
@@ -24,13 +31,19 @@
             <input type="password" id="input_senha" placeholder="Senha">
             <div id="mensagemsenha"></div>
 
-            <button type="button" onclick="login()">Entrar</button>
+            <button type="button" class="btn-login" onclick="login()">
+                Entrar
+            </button>
 
             <p class="link-cadastro">
                 Não possui uma conta?
-                <a href="./cadastro.html">Cadastre-se aqui</a>
+                <a href="./cadastro.html">
+                    Cadastre-se aqui
+                </a>
             </p>
+
         </form>
+
     </div>
 
 </body>
@@ -38,76 +51,122 @@
 </html>
 
 <script>
+
+function voltar() {
+
+    location.href = "./inicial.html";
+
+}
+
 function login() {
+
     let email = input_email.value;
     let senha = input_senha.value;
 
     let validacoes = 0;
 
     if (!email.includes("@") || !email.includes(".com")) {
-        mensagememail.innerHTML = `<span style="color:red">*Email inválido</span>`;
+
+        mensagememail.innerHTML = `
+            <span style="color:red">
+                *Email inválido
+            </span>
+        `;
+
     } else {
+
         mensagememail.innerHTML = "";
         validacoes++;
+
     }
 
     if (senha.length === 0) {
-        mensagemsenha.innerHTML = `<span style="color:red">*Digite a senha</span>`;
+
+        mensagemsenha.innerHTML = `
+            <span style="color:red">
+                *Digite a senha
+            </span>
+        `;
+
     } else {
+
         mensagemsenha.innerHTML = "";
         validacoes++;
+
     }
 
     if (validacoes == 2) {
 
-    fetch("/usuarios/autenticar", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            emailServer: email,
-            senhaServer: senha
+        fetch("/usuarios/autenticar", {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+
+                emailServer: email,
+                senhaServer: senha
+
+            })
+
         })
-    })
 
-    .then(function (resposta) {
+        .then(function (resposta) {
 
-        if (resposta.ok) {
+            if (resposta.ok) {
 
-            return resposta.json();
+                return resposta.json();
 
-        } else if (resposta.status == 403) {
+            } else if (resposta.status == 403) {
 
-            mensagemsenha.innerHTML = `<span style="color:red">*Email e/ou senha incorretos</span>`;
+                mensagemsenha.innerHTML = `
+                    <span style="color:red">
+                        *Email e/ou senha incorretos
+                    </span>
+                `;
 
-        } else {
+            } else {
 
-            alert("Erro ao tentar fazer login!");
+                alert("Erro ao tentar fazer login!");
 
-        }
-    })
+            }
 
-    .then(function (usuario) {
+        })
 
-        if (usuario) {
+        .then(function (usuario) {
 
-            // salva os dados na sessão
-            sessionStorage.NOME_USUARIO = usuario.nome;
-            sessionStorage.EMAIL_USUARIO = usuario.email;
+            if (usuario) {
 
-            mensagememail.innerHTML = `<span style="color:green">Login realizado! Redirecionando...</span>`;
+                sessionStorage.NOME_USUARIO = usuario.nome;
+                sessionStorage.EMAIL_USUARIO = usuario.email;
 
-            setTimeout(() => {
-                location.href = "./home.html";
-            }, 2000);
+                mensagememail.innerHTML = `
+                    <span style="color:green">
+                        Login realizado! Redirecionando...
+                    </span>
+                `;
 
-        }
-    })
+                setTimeout(() => {
 
-    .catch(function (erro) {
-        console.log(erro);
-    });
+                    location.href = "./home.html";
+
+                }, 2000);
+
+            }
+
+        })
+
+        .catch(function (erro) {
+
+            console.log(erro);
+
+        });
+
     }
+
 }
+
 </script>
