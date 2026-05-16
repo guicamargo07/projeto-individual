@@ -1,255 +1,468 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard de Usuários</title>
-
+    <title>Player Radar Dashboard</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;600;700&display=swap"
+        rel="stylesheet">
 
     <style>
-        * { margin:0; padding:0; box-sizing:border-box; font-family: Arial, sans-serif; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         body {
-            background:#0b0d16;
-            color:#eef1ff;
-            min-height:100vh;
+            background: #060e1c;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 24px;
         }
 
-        .main {
-            padding:20px;
-            max-width:1200px;
-            margin:0 auto;
+        .dash-root {
+            background: linear-gradient(135deg, #0a1628 0%, #0d1f3c 50%, #0a1628 100%);
+            width: 100%;
+            max-width: 900px;
+            padding: 28px;
+            border-radius: 18px;
+            font-family: 'Rajdhani', sans-serif;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.07);
         }
 
-        .top {
-            margin-bottom:20px;
+        .dash-root::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255, 255, 255, 0.015) 40px, rgba(255, 255, 255, 0.015) 41px),
+                repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(255, 255, 255, 0.015) 40px, rgba(255, 255, 255, 0.015) 41px);
+            pointer-events: none;
         }
 
-        .kpis {
-            display:grid;
-            grid-template-columns:repeat(4,1fr);
-            gap:15px;
-            margin-bottom:20px;
+        .dash-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 22px;
+            position: relative;
         }
 
-        .kpi {
-            background:#131728;
-            padding:15px;
-            border-radius:10px;
+        .player-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 40px;
+            color: #fff;
+            letter-spacing: 3px;
+            line-height: 1;
         }
 
-        .kpi h3 { font-size:12px; color:#5a6490; }
-        .kpi p { font-size:22px; margin-top:5px; }
-
-        .graficos {
-            display:grid;
-            grid-template-columns:2fr 1fr;
-            gap:20px;
-            align-items:start;
+        .player-pos {
+            font-size: 13px;
+            color: #44aaff;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-top: 5px;
         }
 
-        .card {
-            background:#131728;
-            padding:15px;
-            border-radius:10px;
+        .select-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 6px;
         }
 
-        .chart-box {
-            height:260px;
-            margin-bottom:20px;
+        .select-wrap label {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.35);
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
-        .pie-box {
-            height:220px;
-            display:flex;
-            justify-content:center;
-            align-items:center;
+        select#playerSelect {
+            background: #1a2a44;
+            border: 1px solid rgba(68, 170, 255, 0.35);
+            color: #e8f0ff;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            outline: none;
+            appearance: none;
+            -webkit-appearance: none;
         }
 
-        canvas {
-            width:100% !important;
-            height:100% !important;
+        select#playerSelect option {
+            background: #1a2a44;
+            color: #e8f0ff;
+        }
+
+        select#playerSelect:focus {
+            border-color: #44aaff;
+            box-shadow: 0 0 0 2px rgba(68, 170, 255, 0.2);
+        }
+
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 22px;
+            position: relative;
+        }
+
+        .kpi-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 14px 16px;
+            text-align: center;
+        }
+
+        .kpi-label {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.35);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .kpi-value {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 30px;
+            color: #fff;
+            line-height: 1;
+        }
+
+        .kpi-value.highlight {
+            color: #44aaff;
+        }
+
+        .kpi-value.small {
+            font-size: 18px;
+            margin-top: 4px;
+            line-height: 1.2;
+        }
+
+        .content-row {
+            display: grid;
+            grid-template-columns: 1fr 220px;
+            gap: 16px;
+            position: relative;
+        }
+
+        .radar-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            border-radius: 12px;
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .card-title {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.3);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            align-self: flex-start;
+            margin-bottom: 14px;
+        }
+
+        .chart-wrap {
+            position: relative;
+            width: 100%;
+            height: 280px;
+        }
+
+        .attr-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            border-radius: 12px;
+            padding: 18px;
+        }
+
+        .attr-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 14px;
+        }
+
+        .attr-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .attr-name {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.55);
+            font-weight: 600;
+            width: 80px;
+        }
+
+        .attr-bar-wrap {
+            flex: 1;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 3px;
+            margin: 0 10px;
+            overflow: hidden;
+        }
+
+        .attr-bar-fill {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 0.6s ease;
+        }
+
+        .attr-num {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 20px;
+            color: #fff;
+            width: 28px;
+            text-align: right;
+        }
+
+        @media (max-width: 640px) {
+            .kpi-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .content-row {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 
 <body>
+    <div class="dash-root">
 
-<div class="main">
-
-    <div class="top">
-        <h2>Dashboard de Usuários</h2>
-        <p>Cadastro e distribuição por gênero</p>
-    </div>
-
-    <!-- KPIS -->
-    <div class="kpis">
-        <div class="kpi">
-            <h3>Total Usuários</h3>
-            <p id="kpiTotal">0</p>
-        </div>
-        <div class="kpi">
-            <h3>Masculino</h3>
-            <p id="kpiMasc">0</p>
-        </div>
-        <div class="kpi">
-            <h3>Feminino</h3>
-            <p id="kpiFem">0</p>
-        </div>
-        <div class="kpi">
-            <h3>Não informado</h3>
-            <p id="kpiOutros">0</p>
-        </div>
-    </div>
-
-    <!-- GRÁFICOS -->
-    <div class="graficos">
-
-        <div class="card">
-            <h3>Cadastros por mês</h3>
-            <div class="chart-box">
-                <canvas id="graficoMensal"></canvas>
+        <div class="dash-header">
+            <div>
+                <div class="player-name" id="pName">Cristiano Ronaldo</div>
+                <div class="player-pos" id="pPos">Ponta esquerda</div>
             </div>
-
-            <h3>Cadastros por gênero/mês</h3>
-            <div class="chart-box">
-                <canvas id="graficoGeneroMes"></canvas>
+            <div class="select-wrap">
+                <label>Selecionar Jogador</label>
+                <select id="playerSelect" onchange="updatePlayer(this.value)">
+                    <option value="0">Sporting</option>
+                    <option value="1">Manchester United</option>
+                    <option value="2">Real Madrid</option>
+                    <option value="3">Juventus</option>
+                    <option value="4">Manchester United</option>
+                    <option value="5">Al-Nassr</option>
+                </select>
             </div>
         </div>
 
-        <div class="card">
-            <h3>Distribuição de gênero</h3>
+        <div class="kpi-row">
+            <div class="kpi-card">
+                <div class="kpi-label">Overall</div>
+                <div class="kpi-value highlight" id="kpiOvr">91</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Altura</div>
+                <div class="kpi-value" id="kpiBest">1.80m</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Peso</div>
+                <div class="kpi-value" id="kpiClub">80kg</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Ano</div>
+                <div class="kpi-value" id="kpiNat">2002</div>
+            </div>
+        </div>
 
-            <div class="pie-box">
-                <canvas id="graficoPizza"></canvas>
+        <div class="content-row">
+
+            <div class="radar-card">
+                <div class="card-title">Radar de Atributos</div>
+                <div class="chart-wrap">
+                    <canvas id="radarChart" role="img" aria-label="Gráfico radar de atributos do jogador"></canvas>
+                </div>
             </div>
 
-            <div id="resumoGenero"></div>
-        </div>
+            <div class="attr-card">
+                <div class="card-title">Atributos</div>
+                <div id="attrList"></div>
+            </div>
 
+        </div>
     </div>
 
-</div>
-
-<script>
-
-let chart1, chart2, chart3;
-
-function carregarDashboard() {
-
-    let meses = ['Jan','Fev','Mar','Abr','Mai'];
-
-    let dadosTotal = [80,90,100,120,110];
-    let dadosMasc  = [40,45,50,60,55];
-    let dadosFem   = [30,35,40,45,40];
-    let dadosOut   = [10,10,10,15,15];
-
-    let total = dadosMasc.at(-1) + dadosFem.at(-1) + dadosOut.at(-1);
-    let masc = dadosMasc.at(-1);
-    let fem = dadosFem.at(-1);
-    let outros = dadosOut.at(-1);
-
-    document.getElementById("kpiTotal").innerHTML = total;
-    document.getElementById("kpiMasc").innerHTML = masc;
-    document.getElementById("kpiFem").innerHTML = fem;
-    document.getElementById("kpiOutros").innerHTML = outros;
-
-    document.getElementById("resumoGenero").innerHTML = `
-        <div style="margin-top:10px; font-size:14px; color:#5a6490">
-            Total de usuários cadastrados: <b style="color:#eef1ff">${total}</b>
-        </div>
-    `;
-
-    if(chart1) chart1.destroy();
-    if(chart2) chart2.destroy();
-    if(chart3) chart3.destroy();
-
-    // CADASTROS POR MÊS
-    chart1 = new Chart(document.getElementById("graficoMensal"), {
-        type:"bar",
-        data:{
-            labels: meses,
-            datasets:[{
-                label:"Cadastros",
-                data: dadosTotal,
-                backgroundColor:'#2272e8'
-            }]
-        },
-        options:{
-            responsive:true,
-            maintainAspectRatio:false,
-            plugins:{
-                tooltip:{
-                    callbacks:{
-                        label:(ctx)=>` ${ctx.raw} usuários`
-                    }
-                }
-            }
-        }
-    });
-
-    // CADASTRO POR GÊNERO / MÊS
-    chart2 = new Chart(document.getElementById("graficoGeneroMes"), {
-        type:"bar",
-        data:{
-            labels: meses,
-            datasets:[
-                { label:"Masculino", data:dadosMasc, backgroundColor:'#2272e8' },
-                { label:"Feminino", data:dadosFem, backgroundColor:'#c8d8f5' },
-                { label:"Não informado", data:dadosOut, backgroundColor:'#f5c518' }
-            ]
-        },
-        options:{
-            responsive:true,
-            maintainAspectRatio:false,
-            plugins:{
-                tooltip:{
-                    enabled:true,
-                    mode:'index',
-                    intersect:false
-                },
-                legend:{ position:'top' }
+    <script>
+        const players = [
+            {
+                name: 'Cristiano Ronaldo',
+                pos: 'Ponta esquerda',
+                altura: '1,80m',
+                peso: '75kg',
+                ano: '2002',
+                attrs: { Velocidade: 72, Finalização: 70, Passe: 91, Drible: 78, Defesa: 88, Físico: 87 }
             },
-            interaction:{
-                mode:'index',
-                intersect:false
-            }
-        }
-    });
 
-    // PIZZA
-    chart3 = new Chart(document.getElementById("graficoPizza"), {
-        type:"doughnut",
-        data:{
-            labels:["Masculino","Feminino","Não informado"],
-            datasets:[{
-                data:[masc,fem,outros],
-                backgroundColor:['#2272e8','#c8d8f5','#f5c518']
-            }]
-        },
-        options:{
-            responsive:true,
-            maintainAspectRatio:false,
-            cutout:'70%',
-            plugins:{
-                tooltip:{
-                    callbacks:{
-                        label:(ctx)=>{
-                            let val = ctx.raw;
-                            let perc = ((val/total)*100).toFixed(1);
-                            return `${ctx.label}: ${val} (${perc}%)`;
+            {
+                name: 'Cristiano Ronaldo',
+                pos: 'Ponta esquerda',
+                altura: '1,85m',
+                peso: '80kg',
+                ano: '2008',
+                attrs: { Velocidade: 72, Finalização: 70, Passe: 91, Drible: 78, Defesa: 88, Físico: 87 }
+            },
+
+            {
+                name: 'Cristiano Ronaldo',
+                pos: 'Ponta esquerda',
+                altura: '1,87m',
+                peso: '83kg',
+                ano: '2017',
+                attrs: { Velocidade: 72, Finalização: 70, Passe: 91, Drible: 78, Defesa: 88, Físico: 87 }
+            },
+
+            {
+                name: 'Cristiano Ronaldo',
+                pos: 'Ponta esquerda',
+                altura: '1,87m',
+                peso: '83kg',
+                ano: '2019',
+                attrs: { Velocidade: 72, Finalização: 70, Passe: 91, Drible: 78, Defesa: 88, Físico: 87 }
+            },
+
+            {
+                name: 'Cristiano Ronaldo',
+                pos: 'Ponta esquerda',
+                altura: '1,87m',
+                peso: '85kg',
+                ano: '2022',
+                attrs: { Velocidade: 72, Finalização: 70, Passe: 91, Drible: 78, Defesa: 88, Físico: 87 }
+            },
+
+            {
+                name: 'Cristiano Ronaldo',
+                pos: 'Ponta esquerda',
+                altura: '1,87m',
+                peso: '85kg',
+                ano: '2025',
+                attrs: { Velocidade: 72, Finalização: 70, Passe: 91, Drible: 78, Defesa: 88, Físico: 87 }
+            },
+            
+        ];
+
+        const attrColors = {
+            Velocidade: '#44aaff',
+            Finalização: '#ff7744',
+            Passe: '#77ff44',
+            Drible: '#ff44aa',
+            Defesa: '#aaff44',
+            Físico: '#aa44ff'
+        };
+
+        let radarChart;
+
+        function getBestAttr(attrs) {
+            return Object.entries(attrs).sort((a, b) => b[1] - a[1])[0][0];
+        }
+
+        function getOverall(attrs) {
+            const vals = Object.values(attrs);
+            return Math.round(vals.reduce((a, b) => a + b, 0) / vals.length);
+        }
+
+        function renderAttrList(attrs) {
+            document.getElementById('attrList').innerHTML = Object.entries(attrs).map(([k, v]) => `
+      <div class="attr-item">
+        <div class="attr-name">${k}</div>
+        <div class="attr-bar-wrap">
+          <div class="attr-bar-fill" style="width:${v}%; background:${attrColors[k]}"></div>
+        </div>
+        <div class="attr-num">${v}</div>
+      </div>
+    `).join('');
+        }
+
+        function updatePlayer(idx) {
+            const p = players[idx];
+            const keys = Object.keys(p.attrs);
+            const vals = Object.values(p.attrs);
+
+            document.getElementById('kpiOvr').textContent = getOverall(p.attrs);
+            document.getElementById('kpiBest').textContent = p.altura;  
+            document.getElementById('kpiClub').textContent = p.peso;    
+            document.getElementById('kpiNat').textContent = p.ano;     
+
+            renderAttrList(p.attrs);
+
+            if (radarChart) radarChart.destroy();
+
+            radarChart = new Chart(document.getElementById('radarChart'), {
+                type: 'radar',
+                data: {
+                    labels: keys,
+                    datasets: [{
+                        label: p.name,
+                        data: vals,
+                        backgroundColor: 'rgba(68,170,255,0.18)',
+                        borderColor: '#44aaff',
+                        borderWidth: 2,
+                        pointBackgroundColor: vals.map((v, i) => Object.values(attrColors)[i]),
+                        pointRadius: 4,
+                        pointHoverRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            min: 0,
+                            max: 100,
+                            ticks: {
+                                stepSize: 25,
+                                color: 'rgba(255,255,255,0.25)',
+                                backdropColor: 'transparent',
+                                font: { size: 10 }
+                            },
+                            grid: { color: 'rgba(255,255,255,0.1)' },
+                            angleLines: { color: 'rgba(255,255,255,0.12)' },
+                            pointLabels: {
+                                color: 'rgba(255,255,255,0.75)',
+                                font: { size: 13, weight: '600', family: 'Rajdhani' }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: 'rgba(10,22,40,0.9)',
+                            titleColor: '#44aaff',
+                            bodyColor: '#fff',
+                            borderColor: 'rgba(255,255,255,0.15)',
+                            borderWidth: 1,
+                            callbacks: {
+                                label: ctx => ` ${ctx.label}: ${ctx.raw}`
+                            }
                         }
                     }
                 }
-            }
+            });
         }
-    });
-}
 
-carregarDashboard();
-
-</script>
-
+        updatePlayer(0);
+    </script>
 </body>
+
 </html>
