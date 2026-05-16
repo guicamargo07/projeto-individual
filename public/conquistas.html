@@ -13,18 +13,13 @@
         <img src="./assets/img/cr7-logo.png" class="img-logo">
 
         <div class="navegador">
-            <button class="btn-home" onclick="home()">Home</button>
+            <button class="btn-home" onclick="home()">Trajetória</button>
+            
             <button class="btn-desempenho" onclick="desempenho()">Desempenho</button>
 
-            <div class="perfil-container">
-                <button class="btn-perfil" onclick="toggleMenu()">
-                    <img src="./assets/img/avatar-login.png" class="img-perfil">
-                </button>
-
-                <div id="menuPerfil" class="menu-perfil">
-                    <button onclick="logout(event)">Encerrar sessão</button>
-                </div>
-            </div>
+            <button class="btn-sair" onclick="logout()">
+                Sair
+            </button>
         </div>
     </div>
 
@@ -476,24 +471,8 @@
         location.href = "desempenho.html";
     }
 
-    function toggleMenu() {
-        let menu = document.getElementById("menuPerfil");
-
-        if (menu.style.display === "block") {
-            menu.style.display = "none";
-        } else {
-            menu.style.display = "block";
-        }
+    function logout() {
+        location.href = "login.html"
     }
 
-    function logout(event) {
-        event.stopPropagation();
-        location.href = "./login/login.html";
-    }
-
-    window.onclick = function (event) {
-        if (!event.target.closest('.perfil-container')) {
-            document.getElementById("menuPerfil").style.display = "none";
-        }
-    }
 </script>
