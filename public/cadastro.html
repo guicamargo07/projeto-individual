@@ -4,16 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <title>Cadastro</title>
+
     <link rel="stylesheet" href="./css/cadastro.css">
 </head>
 
 <body>
 
+    <button class="btn-voltar" onclick="voltar()">
+        Voltar
+    </button>
+
     <div class="container">
+
         <div class="logo">
             <img src="./assets/img/cr7-logo.png" alt="Logo">
         </div>
+
         <form class="formulario">
+
             <h2>Cadastro</h2>
 
             <input type="text" id="input_nome" placeholder="Nome" oninput="validarNome()">
@@ -23,6 +31,7 @@
             <div id="mensagememail"></div>
 
             <div class="sexo-group">
+
                 <label>
                     <input type="radio" name="sexo" value="masculino" onchange="validarSexo()">
                     Masculino
@@ -37,6 +46,7 @@
                     <input type="radio" name="sexo" value="naoinforma" onchange="validarSexo()">
                     Prefiro não informar
                 </label>
+
             </div>
 
             <div id="mensagemsexo"></div>
@@ -47,13 +57,19 @@
             <input type="password" id="input_confirmar" placeholder="Confirmar senha" oninput="validarConfirmacao()">
             <div id="mensagemconfirmar"></div>
 
-            <button type="button" onclick="cadastrar()">Cadastrar</button>
+            <button type="button" class="btn-cadastro" onclick="cadastrar()">
+                Cadastrar
+            </button>
 
             <p class="link-login">
                 Já possui uma conta?
-                <a href="./login.html">Faça login</a>
+                <a href="./login.html">
+                    Faça login
+                </a>
             </p>
+
         </form>
+
     </div>
 
     <div id="div_aguardar">
@@ -66,103 +82,195 @@
 
 <script>
 
-    function validarSenha() {
-        let senha = input_senha.value;
-        let temMinuscula = false;
-        let temMaiuscula = false;
-        let temNumero = false;
-        let temEspecial = false;
+function voltar() {
 
-        let mensagem = "";
+    location.href = "./inicial.html";
 
-        if (senha.length === 0) {
-            input_senha.dataset.forte = "false";
-            mensagemsenha.innerHTML = `<span style="color:red">*Digite uma senha</span>`;
-            return;
-        }
+}
 
-        for (let i = 0; i < senha.length; i++) {
-            let char = senha[i];
+function validarSenha() {
 
-            if (char >= 'a' && char <= 'z') temMinuscula = true;
-            else if (char >= 'A' && char <= 'Z') temMaiuscula = true;
-            else if (char >= '0' && char <= '9') temNumero = true;
-            else temEspecial = true;
-        }
+    let senha = input_senha.value;
 
-        if (senha.length < 8) mensagem += "• 8 caracteres<br>";
-        if (!temMinuscula) mensagem += "• letra minúscula<br>";
-        if (!temMaiuscula) mensagem += "• letra maiúscula<br>";
-        if (!temNumero) mensagem += "• número<br>";
-        if (!temEspecial) mensagem += "• caractere especial<br>";
+    let temMinuscula = false;
+    let temMaiuscula = false;
+    let temNumero = false;
+    let temEspecial = false;
 
-        if (mensagem === "") {
-            input_senha.dataset.forte = "true";
-            mensagemsenha.innerHTML = `<span style="color:green">Senha forte</span>`;
+    let mensagem = "";
+
+    if (senha.length === 0) {
+
+        input_senha.dataset.forte = "false";
+
+        mensagemsenha.innerHTML = `
+            <span style="color:red">
+                *Digite uma senha
+            </span>
+        `;
+
+        return;
+    }
+
+    for (let i = 0; i < senha.length; i++) {
+
+        let char = senha[i];
+
+        if (char >= 'a' && char <= 'z') {
+
+            temMinuscula = true;
+
+        } else if (char >= 'A' && char <= 'Z') {
+
+            temMaiuscula = true;
+
+        } else if (char >= '0' && char <= '9') {
+
+            temNumero = true;
+
         } else {
-            input_senha.dataset.forte = "false";
-            mensagemsenha.innerHTML = `<span style="color:red">${mensagem}</span>`;
+
+            temEspecial = true;
+
         }
     }
 
-    function validarNome() {
-
-        let nome = input_nome.value;
-
-        if (nome.length < 3) {
-            mensagemnome.innerHTML = `<span style="color:red">*Nome inválido</span>`;
-        } else {
-            mensagemnome.innerHTML = ``;
-        }
+    if (senha.length < 8) {
+        mensagem += "• 8 caracteres<br>";
     }
 
-    function validarEmail() {
-
-        let email = input_email.value;
-
-        if (!email.includes("@") || !email.includes(".com")) {
-            mensagememail.innerHTML = `<span style="color:red">*Email inválido</span>`;
-        } else {
-            mensagememail.innerHTML = ``;
-        }
+    if (!temMinuscula) {
+        mensagem += "• letra minúscula<br>";
     }
 
-    function validarConfirmacao() {
-
-        let senha = input_senha.value;
-        let confirmarsenha = input_confirmar.value;
-
-        if (confirmarsenha === "") {
-            mensagemconfirmar.innerHTML = `<span style="color:red">*Confirme a senha</span>`;
-        }
-        else if (confirmarsenha !== senha) {
-            mensagemconfirmar.innerHTML = `<span style="color:red">*As senhas não coincidem</span>`;
-        }
-        else {
-            mensagemconfirmar.innerHTML = ``;
-        }
+    if (!temMaiuscula) {
+        mensagem += "• letra maiúscula<br>";
     }
 
-    function validarSexo() {
-
-        let sexoSelecionado = document.querySelector("input[name='sexo']:checked");
-
-        if (sexoSelecionado == null) {
-            mensagemsexo.innerHTML = `<span style="color:red">*Selecione o sexo</span>`;
-        } else {
-            mensagemsexo.innerHTML = ``;
-        }
+    if (!temNumero) {
+        mensagem += "• número<br>";
     }
 
- function cadastrar() {
+    if (!temEspecial) {
+        mensagem += "• caractere especial<br>";
+    }
+
+    if (mensagem === "") {
+
+        input_senha.dataset.forte = "true";
+
+        mensagemsenha.innerHTML = `
+            <span style="color:green">
+                Senha forte
+            </span>
+        `;
+
+    } else {
+
+        input_senha.dataset.forte = "false";
+
+        mensagemsenha.innerHTML = `
+            <span style="color:red">
+                ${mensagem}
+            </span>
+        `;
+    }
+}
+
+function validarNome() {
+
+    let nome = input_nome.value;
+
+    if (nome.length < 3) {
+
+        mensagemnome.innerHTML = `
+            <span style="color:red">
+                *Nome inválido
+            </span>
+        `;
+
+    } else {
+
+        mensagemnome.innerHTML = ``;
+
+    }
+}
+
+function validarEmail() {
+
+    let email = input_email.value;
+
+    if (!email.includes("@") || !email.includes(".com")) {
+
+        mensagememail.innerHTML = `
+            <span style="color:red">
+                *Email inválido
+            </span>
+        `;
+
+    } else {
+
+        mensagememail.innerHTML = ``;
+
+    }
+}
+
+function validarConfirmacao() {
+
+    let senha = input_senha.value;
+    let confirmarsenha = input_confirmar.value;
+
+    if (confirmarsenha === "") {
+
+        mensagemconfirmar.innerHTML = `
+            <span style="color:red">
+                *Confirme a senha
+            </span>
+        `;
+
+    } else if (confirmarsenha !== senha) {
+
+        mensagemconfirmar.innerHTML = `
+            <span style="color:red">
+                *As senhas não coincidem
+            </span>
+        `;
+
+    } else {
+
+        mensagemconfirmar.innerHTML = ``;
+
+    }
+}
+
+function validarSexo() {
+
+    let sexoSelecionado = document.querySelector("input[name='sexo']:checked");
+
+    if (sexoSelecionado == null) {
+
+        mensagemsexo.innerHTML = `
+            <span style="color:red">
+                *Selecione o sexo
+            </span>
+        `;
+
+    } else {
+
+        mensagemsexo.innerHTML = ``;
+
+    }
+}
+
+function cadastrar() {
 
     aguardar();
 
     let nome = input_nome.value;
     let email = input_email.value;
 
-    // pegando o valor do radio selecionado
     let sexoSelecionado = document.querySelector("input[name='sexo']:checked");
+
     let sexo = sexoSelecionado ? sexoSelecionado.value : "";
 
     let senha = input_senha.value;
@@ -171,54 +279,95 @@
     let contadorValidacoes = 0;
 
     if (nome.length < 3) {
-        mensagemnome.innerHTML = `<span style="color:red">*Nome inválido</span>`;
+
+        mensagemnome.innerHTML = `
+            <span style="color:red">
+                *Nome inválido
+            </span>
+        `;
+
     } else {
+
         mensagemnome.innerHTML = ``;
         contadorValidacoes++;
+
     }
 
     if (!email.includes("@") || !email.includes(".com")) {
-        mensagememail.innerHTML = `<span style="color:red">*Email inválido</span>`;
+
+        mensagememail.innerHTML = `
+            <span style="color:red">
+                *Email inválido
+            </span>
+        `;
+
     } else {
+
         mensagememail.innerHTML = ``;
         contadorValidacoes++;
+
     }
 
     if (sexoSelecionado == null) {
-        mensagemsexo.innerHTML = `<span style="color:red">*Selecione o sexo</span>`;
+
+        mensagemsexo.innerHTML = `
+            <span style="color:red">
+                *Selecione o sexo
+            </span>
+        `;
+
     } else {
+
         mensagemsexo.innerHTML = ``;
         contadorValidacoes++;
+
     }
 
     if (senha.length === 0) {
 
-        mensagemsenha.innerHTML = `<span style="color:red">*Digite uma senha</span>`;
+        mensagemsenha.innerHTML = `
+            <span style="color:red">
+                *Digite uma senha
+            </span>
+        `;
 
     } else if (input_senha.dataset.forte != "true") {
 
-        mensagemsenha.innerHTML = `<span style="color:red">*Senha precisa ser forte</span>`;
+        mensagemsenha.innerHTML = `
+            <span style="color:red">
+                *Senha precisa ser forte
+            </span>
+        `;
 
     } else {
 
         contadorValidacoes++;
+
     }
 
     if (confirmarsenha !== senha) {
 
-        mensagemconfirmar.innerHTML = `<span style="color:red">*As senhas não coincidem</span>`;
+        mensagemconfirmar.innerHTML = `
+            <span style="color:red">
+                *As senhas não coincidem
+            </span>
+        `;
 
     } else if (confirmarsenha === "") {
 
-        mensagemconfirmar.innerHTML = `<span style="color:red">*Confirme a senha</span>`;
+        mensagemconfirmar.innerHTML = `
+            <span style="color:red">
+                *Confirme a senha
+            </span>
+        `;
 
     } else {
 
         mensagemconfirmar.innerHTML = ``;
         contadorValidacoes++;
+
     }
 
-    // cadastro
     if (contadorValidacoes == 5) {
 
         fetch("/usuarios/cadastrar", {
@@ -237,6 +386,7 @@
                 senhaServer: senha
 
             })
+
         })
 
         .then(function (resposta) {
@@ -261,6 +411,7 @@
                 throw ("Houve um erro ao realizar o cadastro!");
 
             }
+
         })
 
         .catch(function (erro) {
@@ -278,45 +429,56 @@
     }
 }
 
-    // sessão
-    function validarSessao() {
+function validarSessao() {
 
-        var email = sessionStorage.EMAIL_USUARIO;
-        var nome = sessionStorage.NOME_USUARIO;
+    var email = sessionStorage.EMAIL_USUARIO;
+    var nome = sessionStorage.NOME_USUARIO;
 
-        if (email != null && nome != null) {
-            console.log("Usuário logado:", nome);
-        } else {
-            console.log("Nenhuma sessão encontrada");
-        }
+    if (email != null && nome != null) {
+
+        console.log("Usuário logado:", nome);
+
+    } else {
+
+        console.log("Nenhuma sessão encontrada");
+
+    }
+}
+
+function limparSessao() {
+
+    sessionStorage.clear();
+
+    location.href = "./login.html";
+
+}
+
+function aguardar() {
+
+    let divAguardar = document.getElementById("div_aguardar");
+
+    if (divAguardar) {
+
+        divAguardar.style.display = "flex";
+
+    }
+}
+
+function finalizarAguardar(texto) {
+
+    let divAguardar = document.getElementById("div_aguardar");
+
+    if (divAguardar) {
+
+        divAguardar.style.display = "none";
+
     }
 
-    function limparSessao() {
-        sessionStorage.clear();
-        location.href = "./login.html";
+    if (texto) {
+
+        alert(texto);
+
     }
-
-    // loading
-    function aguardar() {
-
-        let divAguardar = document.getElementById("div_aguardar");
-
-        if (divAguardar) {
-            divAguardar.style.display = "flex";
-        }
-    }
-
-    function finalizarAguardar(texto) {
-
-        let divAguardar = document.getElementById("div_aguardar");
-
-        if (divAguardar) {
-            divAguardar.style.display = "none";
-        }
-
-        if (texto) {
-            alert(texto);
-        }
-    }
+}
 
 </script>
