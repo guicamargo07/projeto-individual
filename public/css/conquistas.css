@@ -59,6 +59,25 @@ body {
     transform: scale(1.05);
 }
 
+.btn-home,
+.btn-atributos,
+.btn-desempenho {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 17px;
+    cursor: pointer;
+    margin-right: 20px;
+    transition: 0.3s;
+}
+
+.btn-home:hover,
+.btn-atributos:hover,
+.btn-desempenho:hover {
+    color: gold;
+    transform: scale(1.05);
+}
+
 .container {
     width: 900px;
     margin: 120px auto 40px auto;
@@ -127,3 +146,4 @@ body {
     margin: 0;
     font-size: 13px;
 }
+
