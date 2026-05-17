@@ -14,12 +14,12 @@
 
         <div class="navegador">
             <button class="btn-home" onclick="home()">Trajetória</button>
-            
+
+            <button class="btn-atributos" onclick="atributos()">Atributos</button>
+
             <button class="btn-desempenho" onclick="desempenho()">Desempenho</button>
 
-            <button class="btn-sair" onclick="logout()">
-                Sair
-            </button>
+            <button class="btn-sair" onclick="logout()">Sair</button>
         </div>
     </div>
 
@@ -474,5 +474,9 @@
     function logout() {
         location.href = "login.html"
     }
+
+    function atributos() {
+    location.href = "./dashboard/dashboard.html";
+}
 
 </script>
