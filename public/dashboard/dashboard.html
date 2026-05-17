@@ -4,423 +4,194 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Player Radar Dashboard</title>
+    <title>Dashboard Cristiano Ronaldo</title>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;600;700&display=swap"
-        rel="stylesheet">
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background: #060e1c;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 24px;
-        }
-
-        .dash-root {
-            background: linear-gradient(135deg, #0a1628 0%, #0d1f3c 50%, #0a1628 100%);
-            width: 100%;
-            max-width: 900px;
-            padding: 28px;
-            border-radius: 18px;
-            font-family: 'Rajdhani', sans-serif;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.07);
-        }
-
-        .dash-root::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background:
-                repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255, 255, 255, 0.015) 40px, rgba(255, 255, 255, 0.015) 41px),
-                repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(255, 255, 255, 0.015) 40px, rgba(255, 255, 255, 0.015) 41px);
-            pointer-events: none;
-        }
-
-        .dash-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 22px;
-            position: relative;
-        }
-
-        .player-name {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 40px;
-            color: #fff;
-            letter-spacing: 3px;
-            line-height: 1;
-        }
-
-        .player-pos {
-            font-size: 13px;
-            color: #44aaff;
-            font-weight: 600;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-top: 5px;
-        }
-
-        .select-wrap {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 6px;
-        }
-
-        .select-wrap label {
-            font-size: 11px;
-            color: rgba(255, 255, 255, 0.35);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        select#playerSelect {
-            background: #1a2a44;
-            border: 1px solid rgba(68, 170, 255, 0.35);
-            color: #e8f0ff;
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            outline: none;
-            appearance: none;
-            -webkit-appearance: none;
-        }
-
-        select#playerSelect option {
-            background: #1a2a44;
-            color: #e8f0ff;
-        }
-
-        select#playerSelect:focus {
-            border-color: #44aaff;
-            box-shadow: 0 0 0 2px rgba(68, 170, 255, 0.2);
-        }
-
-        .kpi-row {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
-            margin-bottom: 22px;
-            position: relative;
-        }
-
-        .kpi-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            padding: 14px 16px;
-            text-align: center;
-        }
-
-        .kpi-label {
-            font-size: 11px;
-            color: rgba(255, 255, 255, 0.35);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 5px;
-        }
-
-        .kpi-value {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 30px;
-            color: #fff;
-            line-height: 1;
-        }
-
-        .kpi-value.highlight {
-            color: #44aaff;
-        }
-
-        .kpi-value.small {
-            font-size: 18px;
-            margin-top: 4px;
-            line-height: 1.2;
-        }
-
-        .content-row {
-            display: grid;
-            grid-template-columns: 1fr 220px;
-            gap: 16px;
-            position: relative;
-        }
-
-        .radar-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.09);
-            border-radius: 12px;
-            padding: 18px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .card-title {
-            font-size: 11px;
-            color: rgba(255, 255, 255, 0.3);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            align-self: flex-start;
-            margin-bottom: 14px;
-        }
-
-        .chart-wrap {
-            position: relative;
-            width: 100%;
-            height: 280px;
-        }
-
-        .attr-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.09);
-            border-radius: 12px;
-            padding: 18px;
-        }
-
-        .attr-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 14px;
-        }
-
-        .attr-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .attr-name {
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.55);
-            font-weight: 600;
-            width: 80px;
-        }
-
-        .attr-bar-wrap {
-            flex: 1;
-            height: 5px;
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 3px;
-            margin: 0 10px;
-            overflow: hidden;
-        }
-
-        .attr-bar-fill {
-            height: 100%;
-            border-radius: 3px;
-            transition: width 0.6s ease;
-        }
-
-        .attr-num {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 20px;
-            color: #fff;
-            width: 28px;
-            text-align: right;
-        }
-
-        @media (max-width: 640px) {
-            .kpi-row {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .content-row {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
-    <div class="dash-root">
 
-        <div class="dash-header">
-            <div>
-                <div class="player-name" id="pName">Cristiano Ronaldo</div>
-                <div class="player-pos" id="pPos">Ponta esquerda</div>
-            </div>
-            <div class="select-wrap">
-                <label>Selecionar Jogador</label>
-                <select id="playerSelect" onchange="updatePlayer(this.value)">
-                    <option value="0">Sporting</option>
-                    <option value="1">Manchester United</option>
-                    <option value="2">Real Madrid</option>
-                    <option value="3">Juventus</option>
-                    <option value="4">Manchester United</option>
-                    <option value="5">Al-Nassr</option>
-                </select>
-            </div>
-        </div>
+    <div class="container_header">
+        <img src="../assets/img/cr7-logo.png" class="img-logo">
 
-        <div class="kpi-row">
-            <div class="kpi-card">
-                <div class="kpi-label">Overall</div>
-                <div class="kpi-value highlight" id="kpiOvr">91</div>
-            </div>
-            <div class="kpi-card">
-                <div class="kpi-label">Altura</div>
-                <div class="kpi-value" id="kpiBest">1.80m</div>
-            </div>
-            <div class="kpi-card">
-                <div class="kpi-label">Peso</div>
-                <div class="kpi-value" id="kpiClub">80kg</div>
-            </div>
-            <div class="kpi-card">
-                <div class="kpi-label">Ano</div>
-                <div class="kpi-value" id="kpiNat">2002</div>
-            </div>
-        </div>
+        <div class="navegador">
 
-        <div class="content-row">
+            <button class="btn-home" onclick="home()">
+                Trajetória
+            </button>
 
-            <div class="radar-card">
-                <div class="card-title">Radar de Atributos</div>
-                <div class="chart-wrap">
-                    <canvas id="radarChart" role="img" aria-label="Gráfico radar de atributos do jogador"></canvas>
-                </div>
-            </div>
+            <button class="btn-desempenho" onclick="desempenho()">
+                Desempenho
+            </button>
 
-            <div class="attr-card">
-                <div class="card-title">Atributos</div>
-                <div id="attrList"></div>
-            </div>
+            <button class="btn-conquistas" onclick="conquistas()">
+                Conquistas
+            </button>
 
+            <button class="btn-sair" onclick="logout()">
+                Sair
+            </button>
         </div>
     </div>
 
-    <script>
-        const players = [
-            {
-                name: 'Cristiano Ronaldo',
-                pos: 'Ponta esquerda',
-                altura: '1,80m',
-                peso: '75kg',
-                ano: '2002',
-                attrs: { Velocidade: 72, Finalização: 70, Passe: 91, Drible: 78, Defesa: 88, Físico: 87 }
-            },
+    <div class="main">
 
-            {
-                name: 'Cristiano Ronaldo',
-                pos: 'Ponta esquerda',
-                altura: '1,85m',
-                peso: '80kg',
-                ano: '2008',
-                attrs: { Velocidade: 72, Finalização: 70, Passe: 91, Drible: 78, Defesa: 88, Físico: 87 }
-            },
+        <div class="topo">
 
-            {
-                name: 'Cristiano Ronaldo',
-                pos: 'Ponta esquerda',
-                altura: '1,87m',
-                peso: '83kg',
-                ano: '2017',
-                attrs: { Velocidade: 72, Finalização: 70, Passe: 91, Drible: 78, Defesa: 88, Físico: 87 }
-            },
+            <div class="titulo">
+                <h1 id="nome">Cristiano Ronaldo</h1>
+                <p id="info"></p>
+            </div>
 
-            {
-                name: 'Cristiano Ronaldo',
-                pos: 'Ponta esquerda',
-                altura: '1,87m',
-                peso: '83kg',
-                ano: '2019',
-                attrs: { Velocidade: 72, Finalização: 70, Passe: 91, Drible: 78, Defesa: 88, Físico: 87 }
-            },
+            <select id="selectJogador" onchange="trocarJogador()">
+                <option value="5">Sporting</option>
+                <option value="1">Manchester United</option>
+                <option value="0">Real Madrid</option>
+                <option value="3">Juventus</option>
+                <option value="4">Manchester United (2ª passagem)</option>
+                <option value="2">Al-Nassr</option>
+            </select>
 
-            {
-                name: 'Cristiano Ronaldo',
-                pos: 'Ponta esquerda',
-                altura: '1,87m',
-                peso: '85kg',
-                ano: '2022',
-                attrs: { Velocidade: 72, Finalização: 70, Passe: 91, Drible: 78, Defesa: 88, Físico: 87 }
-            },
-
-            {
-                name: 'Cristiano Ronaldo',
-                pos: 'Ponta esquerda',
-                altura: '1,87m',
-                peso: '85kg',
-                ano: '2025',
-                attrs: { Velocidade: 72, Finalização: 70, Passe: 91, Drible: 78, Defesa: 88, Físico: 87 }
-            },
-            
-        ];
-
-        const attrColors = {
-            Velocidade: '#44aaff',
-            Finalização: '#ff7744',
-            Passe: '#77ff44',
-            Drible: '#ff44aa',
-            Defesa: '#aaff44',
-            Físico: '#aa44ff'
-        };
-
-        let radarChart;
-
-        function getBestAttr(attrs) {
-            return Object.entries(attrs).sort((a, b) => b[1] - a[1])[0][0];
-        }
-
-        function getOverall(attrs) {
-            const vals = Object.values(attrs);
-            return Math.round(vals.reduce((a, b) => a + b, 0) / vals.length);
-        }
-
-        function renderAttrList(attrs) {
-            document.getElementById('attrList').innerHTML = Object.entries(attrs).map(([k, v]) => `
-      <div class="attr-item">
-        <div class="attr-name">${k}</div>
-        <div class="attr-bar-wrap">
-          <div class="attr-bar-fill" style="width:${v}%; background:${attrColors[k]}"></div>
         </div>
-        <div class="attr-num">${v}</div>
-      </div>
-    `).join('');
+
+        <div class="kpis">
+
+            <div class="kpi">
+                <h3>Overall</h3>
+                <p id="overall">-</p>
+            </div>
+
+            <div class="kpi">
+                <h3>Altura</h3>
+                <p id="altura">-</p>
+            </div>
+
+            <div class="kpi">
+                <h3>Peso</h3>
+                <p id="peso">-</p>
+            </div>
+
+            <div class="kpi">
+                <h3>Ano</h3>
+                <p id="ano">-</p>
+            </div>
+
+        </div>
+
+        <div class="conteudo">
+
+            <div class="card">
+                <h2>Radar de Atributos</h2>
+                <div class="grafico">
+                    <canvas id="graficoRadar"></canvas>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Atributos</h2>
+                <div id="listaAtributos"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        let jogadores = [];
+
+        fetch("/dashboard/listar")
+            .then(function (resposta) {
+                resposta.json().then(function (dados) {
+
+                    for (let i = 0; i < dados.length; i++) {
+                        jogadores.push({
+                            clube: dados[i].clube,
+                            ano: dados[i].ano,
+                            posicao: dados[i].posicao,
+                            overall: dados[i].overall,
+                            altura: dados[i].altura,
+                            peso: dados[i].peso,
+                            atributos: [
+                                dados[i].velocidade,
+                                dados[i].finalizacao,
+                                dados[i].passe,
+                                dados[i].drible,
+                                dados[i].defesa,
+                                dados[i].fisico
+                            ]
+                        });
+                    }
+
+                    trocarJogador();
+
+                });
+            });
+
+        let radar;
+
+        function trocarJogador() {
+
+            let indice = document.getElementById("selectJogador").value;
+            let jogador = jogadores[indice];
+
+            if (!jogador) return;
+
+            document.getElementById("nome").innerHTML = "Cristiano Ronaldo";
+            document.getElementById("info").innerHTML = jogador.posicao;
+            document.getElementById("overall").innerHTML = jogador.overall;
+            document.getElementById("altura").innerHTML = jogador.altura;
+            document.getElementById("peso").innerHTML = jogador.peso;
+            document.getElementById("ano").innerHTML = jogador.ano;
+
+            criarRadar(jogador.atributos);
+            mostrarAtributos(jogador.atributos);
         }
 
-        function updatePlayer(idx) {
-            const p = players[idx];
-            const keys = Object.keys(p.attrs);
-            const vals = Object.values(p.attrs);
+        function mostrarAtributos(atributos) {
 
-            document.getElementById('kpiOvr').textContent = getOverall(p.attrs);
-            document.getElementById('kpiBest').textContent = p.altura;  
-            document.getElementById('kpiClub').textContent = p.peso;    
-            document.getElementById('kpiNat').textContent = p.ano;     
+            let nomes = ["Velocidade", "Finalização", "Passe", "Drible", "Defesa", "Físico"];
+            let cores = ["#3fa7ff", "#ff7b54", "#80ff44", "#ff4dc4", "#b6ff2e", "#a855ff"];
 
-            renderAttrList(p.attrs);
+            document.getElementById("listaAtributos").innerHTML = "";
 
-            if (radarChart) radarChart.destroy();
+            for (let i = 0; i < nomes.length; i++) {
+                document.getElementById("listaAtributos").innerHTML += `
+                    <div class="atributo">
+                        <div class="atributo-topo">
+                            <span>${nomes[i]}</span>
+                            <span>${atributos[i]}</span>
+                        </div>
+                        <div class="barra">
+                            <div class="preenchimento"
+                            style="width:${atributos[i]}%; background:${cores[i]}">
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+        }
 
-            radarChart = new Chart(document.getElementById('radarChart'), {
+        function criarRadar(atributos) {
+
+            if (radar) {
+                radar.destroy();
+            }
+
+            radar = new Chart(document.getElementById("graficoRadar"), {
                 type: 'radar',
                 data: {
-                    labels: keys,
+                    labels: ['Velocidade', 'Finalização', 'Passe', 'Drible', 'Defesa', 'Físico'],
                     datasets: [{
-                        label: p.name,
-                        data: vals,
-                        backgroundColor: 'rgba(68,170,255,0.18)',
-                        borderColor: '#44aaff',
+                        label: 'Atributos',
+                        data: atributos,
+                        backgroundColor: 'rgba(63,167,255,0.2)',
+                        borderColor: '#3fa7ff',
                         borderWidth: 2,
-                        pointBackgroundColor: vals.map((v, i) => Object.values(attrColors)[i]),
-                        pointRadius: 4,
-                        pointHoverRadius: 6
+                        pointBackgroundColor: '#3fa7ff',
+                        pointRadius: 4
                     }]
                 },
                 options: {
@@ -431,38 +202,44 @@
                             min: 0,
                             max: 100,
                             ticks: {
-                                stepSize: 25,
-                                color: 'rgba(255,255,255,0.25)',
-                                backdropColor: 'transparent',
-                                font: { size: 10 }
+                                color: '#7d8fb3',
+                                backdropColor: 'transparent'
                             },
                             grid: { color: 'rgba(255,255,255,0.1)' },
-                            angleLines: { color: 'rgba(255,255,255,0.12)' },
+                            angleLines: { color: 'rgba(255,255,255,0.1)' },
                             pointLabels: {
-                                color: 'rgba(255,255,255,0.75)',
-                                font: { size: 13, weight: '600', family: 'Rajdhani' }
+                                color: 'white',
+                                font: { size: 13 }
                             }
                         }
                     },
                     plugins: {
-                        legend: { display: false },
-                        tooltip: {
-                            backgroundColor: 'rgba(10,22,40,0.9)',
-                            titleColor: '#44aaff',
-                            bodyColor: '#fff',
-                            borderColor: 'rgba(255,255,255,0.15)',
-                            borderWidth: 1,
-                            callbacks: {
-                                label: ctx => ` ${ctx.label}: ${ctx.raw}`
-                            }
+                        legend: {
+                            labels: { color: 'white' }
                         }
                     }
                 }
             });
         }
 
-        updatePlayer(0);
+        function desempenho() {
+            location.href = "../desempenho.html";
+        }
+
+        function conquistas() {
+            location.href = "../conquistas.html";
+        }
+
+        function logout() {
+            location.href = "../login.html";
+        }
+
+        function home() {
+            location.href = "../home.html";
+        }
+
     </script>
+
 </body>
 
 </html>
