@@ -95,7 +95,11 @@ function cadastrar(req, res) {
                     erro.sqlMessage
                 );
 
-                res.status(500).json(erro.sqlMessage);
+                if (erro.code === 'ER_DUP_ENTRY') {
+                    res.status(409).send("Email já cadastrado!");
+                } else {
+                    res.status(500).json(erro.sqlMessage);
+                }
 
             });
     }
