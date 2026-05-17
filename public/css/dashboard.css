@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #060e1c;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+}
+
+.container_header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #111;
+    padding: 10px 0;
+    position: relative;
+    z-index: 1000;
+}
+
+.img-logo {
+    width: 100px;
+    height: 60px;
+    margin-left: 20px;
+    border-radius: 10px;
+}
+
+.navegador {
+    display: flex;
+    align-items: center;
+}
+
+.btn-home,
+.btn-desempenho,
+.btn-conquistas,
+.btn-sair {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 17px;
+    cursor: pointer;
+    margin-right: 20px;
+    transition: 0.3s;
+}
+
+.btn-home:hover,
+.btn-desempenho:hover,
+.btn-conquistas:hover,
+.btn-sair:hover {
+    color: gold;
+    transform: scale(1.05);
+}
+
+.main {
+    width: 88%;
+    max-width: 1050px;
+    margin: 20px auto;
+}
+
+.topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.titulo h1 {
+    font-size: 38px;
+}
+
+.titulo p {
+    color: #4da3ff;
+    margin-top: 5px;
+    font-size: 15px;
+}
+
+select {
+    background: #0f1b38;
+    color: white;
+    border: 1px solid #2e5ea7;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.kpis {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.kpi {
+    background: #0d1630;
+    padding: 16px;
+    border-radius: 12px;
+}
+
+.kpi h3 {
+    color: #4d6aa5;
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+.kpi p {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.conteudo {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 15px;
+}
+
+.card {
+    background: #0d1630;
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.card h2 {
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+.grafico {
+    height: 380px;
+}
+
+.atributo {
+    margin-bottom: 18px;
+}
+
+.atributo-topo {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+}
+
+.barra {
+    width: 100%;
+    height: 7px;
+    background: #1f2a44;
+    border-radius: 10px;
+}
+
+.preenchimento {
+    height: 100%;
+    border-radius: 10px;
+}
