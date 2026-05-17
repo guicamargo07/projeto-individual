@@ -55,8 +55,8 @@ insert into desempenho values
 (default, 346, 145, 73, 2), 
 (default, 141, 121, 24, 3), 
 (default, 134, 101, 28, 4), 
-(default, 31, 5, 6, 5), 
-(default, 244, 149, 46, 6);
+(default, 31, 5, 6, 6), 
+(default, 244, 149, 46, 7);
 
 insert into dashboard values
 -- Sporting
