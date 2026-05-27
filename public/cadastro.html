@@ -4,15 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Cadastro</title>
-
     <link rel="stylesheet" href="./css/cadastro.css">
 </head>
 
 <body>
 
-    <button class="btn-voltar" onclick="voltar()">
-        Voltar
-    </button>
+    <button class="btn-voltar" onclick="voltar()">Voltar</button>
 
     <div class="container">
 
@@ -31,25 +28,36 @@
             <div id="mensagememail"></div>
 
             <div class="sexo-group">
-
                 <label>
                     <input type="radio" name="sexo" value="masculino" onchange="validarSexo()">
                     Masculino
                 </label>
-
                 <label>
                     <input type="radio" name="sexo" value="feminino" onchange="validarSexo()">
                     Feminino
                 </label>
-
                 <label>
                     <input type="radio" name="sexo" value="naoinforma" onchange="validarSexo()">
                     Prefiro não informar
                 </label>
-
             </div>
-
             <div id="mensagemsexo"></div>
+
+            <input type="text" id="input_jogador" placeholder="Jogador favorito (opcional)" oninput="validarJogador()">
+            <div id="mensagemjogador"></div>
+
+            <select id="input_posicao" onchange="validarPosicao()">
+                <option value="">Posição favorita</option>
+                <option value="goleiro">Goleiro</option>
+                <option value="defensor">Defensor</option>
+                <option value="meio-campo">Meio campo</option>
+                <option value="atacante">Atacante</option>
+                <option value="nao-tenho">Não tenho</option>
+            </select>
+            <div id="mensagemposicao"></div>
+
+            <input type="text" id="input_clube" placeholder="Clube do coração" oninput="validarClube()">
+            <div id="mensagemclube"></div>
 
             <input type="password" id="input_senha" placeholder="Senha" oninput="validarSenha()">
             <div id="mensagemsenha"></div>
@@ -57,15 +65,11 @@
             <input type="password" id="input_confirmar" placeholder="Confirmar senha" oninput="validarConfirmacao()">
             <div id="mensagemconfirmar"></div>
 
-            <button type="button" class="btn-cadastro" onclick="cadastrar()">
-                Cadastrar
-            </button>
+            <button type="button" class="btn-cadastro" onclick="cadastrar()">Cadastrar</button>
 
             <p class="link-login">
                 Já possui uma conta?
-                <a href="./login.html">
-                    Faça login
-                </a>
+                <a href="./login.html">Faça login</a>
             </p>
 
         </form>
@@ -82,43 +86,49 @@
         location.href = "./inicial.html";
     }
 
+    function validarJogador() {
+        let jogador = input_jogador.value;
+        if (jogador.length < 3) {
+            mensagemjogador.innerHTML = `<span style="color:red">*Jogador inválido</span>`;
+        } else {
+            mensagemjogador.innerHTML = ``;
+        }
+    }
+
+    function validarPosicao() {
+        if (input_posicao.value === "") {
+            mensagemposicao.innerHTML = `<span style="color:red">*Selecione uma posição</span>`;
+        } else {
+            mensagemposicao.innerHTML = ``;
+        }
+    }
+
+    function validarClube() {
+        let clube = input_clube.value;
+        if (clube.length < 2) {
+            mensagemclube.innerHTML = `<span style="color:red">*Clube inválido</span>`;
+        } else {
+            mensagemclube.innerHTML = ``;
+        }
+    }
+
     function validarSenha() {
-
         let senha = input_senha.value;
-
-        let temMinuscula = false;
-        let temMaiuscula = false;
-        let temNumero = false;
-        let temEspecial = false;
-
+        let temMinuscula = false, temMaiuscula = false, temNumero = false, temEspecial = false;
         let mensagem = "";
 
         if (senha.length === 0) {
-
             input_senha.dataset.forte = "false";
-
-            mensagemsenha.innerHTML = `
-            <span style="color:red">
-                *Digite uma senha
-            </span>
-        `;
-
+            mensagemsenha.innerHTML = `<span style="color:red">*Digite uma senha</span>`;
             return;
         }
 
         for (let i = 0; i < senha.length; i++) {
-
             let char = senha[i];
-
-            if (char >= 'a' && char <= 'z') {
-                temMinuscula = true;
-            } else if (char >= 'A' && char <= 'Z') {
-                temMaiuscula = true;
-            } else if (char >= '0' && char <= '9') {
-                temNumero = true;
-            } else {
-                temEspecial = true;
-            }
+            if (char >= 'a' && char <= 'z') temMinuscula = true;
+            else if (char >= 'A' && char <= 'Z') temMaiuscula = true;
+            else if (char >= '0' && char <= '9') temNumero = true;
+            else temEspecial = true;
         }
 
         if (senha.length < 8) mensagem += "• 8 caracteres<br>";
@@ -128,57 +138,33 @@
         if (!temEspecial) mensagem += "• caractere especial<br>";
 
         if (mensagem === "") {
-
             input_senha.dataset.forte = "true";
-
-            mensagemsenha.innerHTML = `
-            <span style="color:green">
-                Senha forte
-            </span>
-        `;
-
+            mensagemsenha.innerHTML = `<span style="color:green">Senha forte</span>`;
         } else {
-
             input_senha.dataset.forte = "false";
-
-            mensagemsenha.innerHTML = `
-            <span style="color:red">
-                ${mensagem}
-            </span>
-        `;
+            mensagemsenha.innerHTML = `<span style="color:red">${mensagem}</span>`;
         }
     }
 
     function validarNome() {
-
         let nome = input_nome.value;
-
-        if (nome.length < 3) {
-            mensagemnome.innerHTML = `<span style="color:red">*Nome inválido</span>`;
-        } else {
-            mensagemnome.innerHTML = ``;
-        }
+        mensagemnome.innerHTML = nome.length < 3
+            ? `<span style="color:red">*Nome inválido</span>`
+            : ``;
     }
 
     function validarEmail() {
-
         let email = input_email.value;
-
-        if (!email.includes("@") || !email.includes(".com")) {
-            mensagememail.innerHTML = `<span style="color:red">*Email inválido</span>`;
-        } else {
-            mensagememail.innerHTML = ``;
-        }
+        mensagememail.innerHTML = (!email.includes("@") || !email.includes(".com"))
+            ? `<span style="color:red">*Email inválido</span>`
+            : ``;
     }
 
     function validarConfirmacao() {
-
-        let senha = input_senha.value;
         let confirmarsenha = input_confirmar.value;
-
         if (confirmarsenha === "") {
             mensagemconfirmar.innerHTML = `<span style="color:red">*Confirme a senha</span>`;
-        } else if (confirmarsenha !== senha) {
+        } else if (confirmarsenha !== input_senha.value) {
             mensagemconfirmar.innerHTML = `<span style="color:red">*As senhas não coincidem</span>`;
         } else {
             mensagemconfirmar.innerHTML = ``;
@@ -186,24 +172,21 @@
     }
 
     function validarSexo() {
-
         let sexoSelecionado = document.querySelector("input[name='sexo']:checked");
-
-        if (sexoSelecionado == null) {
-            mensagemsexo.innerHTML = `<span style="color:red">*Selecione o sexo</span>`;
-        } else {
-            mensagemsexo.innerHTML = ``;
-        }
+        mensagemsexo.innerHTML = sexoSelecionado == null
+            ? `<span style="color:red">*Selecione o sexo</span>`
+            : ``;
     }
 
     function cadastrar() {
 
         let nome = input_nome.value;
         let email = input_email.value;
-
         let sexoSelecionado = document.querySelector("input[name='sexo']:checked");
         let sexo = sexoSelecionado ? sexoSelecionado.value : "";
-
+        let jogador = input_jogador.value;       
+        let posicao = input_posicao.value;       
+        let clube = input_clube.value;           
         let senha = input_senha.value;
         let confirmarsenha = input_confirmar.value;
 
@@ -211,43 +194,41 @@
 
         if (nome.length < 3) {
             mensagemnome.innerHTML = `<span style="color:red">*Nome inválido</span>`;
-        } else {
-            mensagemnome.innerHTML = ``;
-            contadorValidacoes++;
-        }
+        } else { mensagemnome.innerHTML = ``; contadorValidacoes++; }
 
         if (!email.includes("@") || !email.includes(".com")) {
             mensagememail.innerHTML = `<span style="color:red">*Email inválido</span>`;
-        } else {
-            mensagememail.innerHTML = ``;
-            contadorValidacoes++;
-        }
+        } else { mensagememail.innerHTML = ``; contadorValidacoes++; }
 
         if (sexoSelecionado == null) {
             mensagemsexo.innerHTML = `<span style="color:red">*Selecione o sexo</span>`;
-        } else {
-            mensagemsexo.innerHTML = ``;
-            contadorValidacoes++;
-        }
+        } else { mensagemsexo.innerHTML = ``; contadorValidacoes++; }
+
+        if (jogador.length < 3) {
+            mensagemjogador.innerHTML = `<span style="color:red">*Jogador inválido</span>`;
+        } else { mensagemjogador.innerHTML = ``; contadorValidacoes++; }
+
+        if (posicao === "") {
+            mensagemposicao.innerHTML = `<span style="color:red">*Selecione uma posição</span>`;
+        } else { mensagemposicao.innerHTML = ``; contadorValidacoes++; }
+
+        if (clube.length < 2) {
+            mensagemclube.innerHTML = `<span style="color:red">*Clube inválido</span>`;
+        } else { mensagemclube.innerHTML = ``; contadorValidacoes++; }
 
         if (senha.length === 0) {
             mensagemsenha.innerHTML = `<span style="color:red">*Digite uma senha</span>`;
         } else if (input_senha.dataset.forte != "true") {
             mensagemsenha.innerHTML = `<span style="color:red">*Senha precisa ser forte</span>`;
-        } else {
-            contadorValidacoes++;
-        }
+        } else { contadorValidacoes++; }
 
         if (confirmarsenha !== senha) {
             mensagemconfirmar.innerHTML = `<span style="color:red">*As senhas não coincidem</span>`;
         } else if (confirmarsenha === "") {
             mensagemconfirmar.innerHTML = `<span style="color:red">*Confirme a senha</span>`;
-        } else {
-            mensagemconfirmar.innerHTML = ``;
-            contadorValidacoes++;
-        }
+        } else { mensagemconfirmar.innerHTML = ``; contadorValidacoes++; }
 
-        if (contadorValidacoes == 5) {
+        if (contadorValidacoes == 8) {
 
             fetch("/usuarios/cadastrar", {
                 method: "POST",
@@ -256,50 +237,35 @@
                     nomeServer: nome,
                     emailServer: email,
                     generoServer: sexo,
+                    jogadorServer: jogador,     
+                    posicaoServer: posicao,     
+                    clubeServer: clube,         
                     senhaServer: senha
                 })
             })
 
-                .then(function (resposta) {
+            .then(function (resposta) {
 
-                    if (resposta.ok) {
+                if (resposta.ok) {
 
-                        sessionStorage.NOME_USUARIO = nome;
-                        sessionStorage.EMAIL_USUARIO = email;
+                    sessionStorage.NOME_USUARIO = nome;
+                    sessionStorage.EMAIL_USUARIO = email;
 
-                        mensagemconfirmar.innerHTML = `
-            <span style="color:green">
-                Cadastro realizado! Redirecionando...
-            </span>
-        `;
+                    mensagemconfirmar.innerHTML = `
+                        <span style="color:green">Cadastro realizado! Redirecionando...</span>
+                    `;
 
-                        setTimeout(() => {
-                            location.href = "./login.html";
-                        }, 2000);
+                    setTimeout(() => { location.href = "./login.html"; }, 2000);
 
-                    } else if (resposta.status === 409) {
+                } else if (resposta.status === 409) {
+                    mensagememail.innerHTML = `<span style="color:red">*Este email já está cadastrado</span>`;
+                } else {
+                    mensagememail.innerHTML = `<span style="color:red">*Erro ao realizar o cadastro</span>`;
+                }
 
-                        mensagememail.innerHTML = `
-            <span style="color:red">
-                *Este email já está cadastrado
-            </span>
-        `;
+            })
 
-                    } else {
-
-                        mensagememail.innerHTML = `
-            <span style="color:red">
-                *Erro ao realizar o cadastro
-            </span>
-        `;
-
-                    }
-
-                })
-
-                .catch(function (erro) {
-                    console.log(erro);
-                });
+            .catch(function (erro) { console.log(erro); });
 
         }
     }
