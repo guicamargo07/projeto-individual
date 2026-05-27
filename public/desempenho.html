@@ -14,8 +14,13 @@
 
         <div class="navegador">
             <button class="btn-home" onclick="home()">Trajetória</button>
+
             <button class="btn-atributos" onclick="atributos()">Atributos</button>
+
             <button class="btn-conquistas" onclick="conquistas()">Conquistas</button>
+
+            <button class="btn-perfil" onclick="perfil()">Perfil</button>
+
             <button class="btn-sair" onclick="logout()">Sair</button>
         </div>
     </div>
@@ -113,6 +118,10 @@
 
     function atributos() {
         location.href = "./dashboard/dashboard.html";
+    }
+
+    function perfil() {
+        location.href = "telaperfil.html";
     }
 
     carregarDesempenho();
