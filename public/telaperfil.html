@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Perfil</title>
+    <link rel="stylesheet" href="./css/telaperfil.css">
+</head>
+
+<body>
+
+    <div class="container_header">
+        <img src="./assets/img/cr7-logo.png" class="img-logo">
+
+        <div class="navegador">
+            <button class="btn-home" onclick="home()">Trajetória</button>
+
+            <button class="btn-atributos" onclick="atributos()">Atributos</button>
+
+            <button class="btn-desempenho" onclick="desempenho()">Desempenho</button>
+
+            <button class="btn-conquistas" onclick="conquistas()">Conquistas</button>
+
+            <button class="btn-sair" onclick="logout()">Sair</button>
+        </div>
+    </div>
+
+    <div class="perfil">
+        <h2>MEU PERFIL</h2>
+
+        <div class="cards-grid">
+
+            <div class="card">
+                <span class="card-label">Nome</span>
+                <span class="card-valor" id="perfil-nome"></span>
+            </div>
+
+            <div class="card">
+                <span class="card-label">Email</span>
+                <span class="card-valor" id="perfil-email"></span>
+            </div>
+
+            <div class="card">
+                <span class="card-label">Gênero</span>
+                <span class="card-valor" id="perfil-genero"></span>
+            </div>
+
+            <div class="card">
+                <span class="card-label">Jogador favorito</span>
+                <span class="card-valor" id="perfil-jogador"></span>
+            </div>
+
+            <div class="card">
+                <span class="card-label">Posição</span>
+                <span class="card-valor" id="perfil-posicao"></span>
+            </div>
+
+            <div class="card">
+                <span class="card-label">Clube do coração</span>
+                <span class="card-valor" id="perfil-clube"></span>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>
+
+<script>
+    function carregarPerfil() {
+        const email = sessionStorage.EMAIL_USUARIO;
+
+        if (!email) {
+            location.href = "./login.html";
+            return;
+        }
+
+        fetch(`http://localhost:3333/usuarios/perfil?email=${email}`)
+            .then(function (resposta) {
+                return resposta.json();
+            })
+            .then(function (usuario) {
+                document.getElementById("perfil-nome").textContent = usuario.nome;
+                document.getElementById("perfil-email").textContent = usuario.email;
+                document.getElementById("perfil-genero").textContent = usuario.genero;
+                document.getElementById("perfil-jogador").textContent = usuario.jogador;
+                document.getElementById("perfil-posicao").textContent = usuario.posicao;
+                document.getElementById("perfil-clube").textContent = usuario.clube;
+            })
+            .catch(function (erro) {
+                console.log(erro);
+            });
+    }
+
+    function home() {
+        location.href = "home.html";
+    }
+
+    function conquistas() {
+        location.href = "conquistas.html";
+    }
+
+    function logout() {
+        location.href = "login.html";
+    }
+
+    function atributos() {
+        location.href = "./dashboard/dashboard.html";
+    }
+
+    function desempenho() {
+        location.href = "desempenho.html";
+    }
+
+    carregarPerfil();
+</script>
