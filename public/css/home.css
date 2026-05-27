@@ -32,55 +32,10 @@ body {
     display: flex;
 }
 
-.btn-desempenho {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 17px;
-    cursor: pointer;
-    margin-right: 20px;
-    transition: 0.3s;
-}
-
-.btn-desempenho:hover {
-    color: gold;
-    transform: scale(1.05);
-}
-
-.btn-conquistas {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 17px;
-    cursor: pointer;
-    margin-right: 20px;
-    transition: 0.3s;
-}
-
-.btn-conquistas:hover {
-    color: gold;
-    transform: scale(1.05);
-}
-
-.btn-home,
 .btn-atributos,
-.btn-desempenho {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 17px;
-    cursor: pointer;
-    margin-right: 20px;
-    transition: 0.3s;
-}
-
-.btn-home:hover,
-.btn-atributos:hover,
-.btn-desempenho:hover {
-    color: gold;
-    transform: scale(1.05);
-}
-
+.btn-desempenho,
+.btn-conquistas,
+.btn-perfil,
 .btn-sair {
     background: none;
     border: none;
@@ -91,6 +46,10 @@ body {
     transition: 0.3s;
 }
 
+.btn-atributos:hover,
+.btn-desempenho:hover,
+.btn-conquistas:hover,
+.btn-perfil:hover,
 .btn-sair:hover {
     color: gold;
     transform: scale(1.05);
