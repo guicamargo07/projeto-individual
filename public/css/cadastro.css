@@ -48,6 +48,29 @@ body {
     background-color: #f9f9f9;
 }
 
+.formulario select {
+    width: 100%;
+
+    padding: 12px;
+
+    margin-bottom: 8px;
+
+    border: 1px solid #ccc;
+    border-radius: 8px;
+
+    background-color: #f9f9f9;
+
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+
+    color: #333;
+
+    appearance: none;
+    -webkit-appearance: none;
+
+    cursor: pointer;
+}
+
 .sexo {
     margin-bottom: 10px;
 
