@@ -61,7 +61,9 @@ body {
 
 .btn-home,
 .btn-atributos,
-.btn-desempenho {
+.btn-conquistas,
+.btn-perfil,
+.btn-sair {
     background: none;
     border: none;
     color: white;
@@ -73,7 +75,9 @@ body {
 
 .btn-home:hover,
 .btn-atributos:hover,
-.btn-desempenho:hover {
+.btn-conquistas:hover,
+.btn-perfil:hover,
+.btn-sair:hover {
     color: gold;
     transform: scale(1.05);
 }
