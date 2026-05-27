@@ -10,16 +10,26 @@ function autenticar(email, senha) {
     return database.executar(instrucaoSql, [email, senha]);
 }
 
-function cadastrar(nome, email, genero, senha) {
+function cadastrar(nome, email, genero, jogador, posicao, clube, senha) {
     var instrucaoSql = `
-        INSERT INTO usuario (nome, email, genero, senha)
-        VALUES (?, ?, ?, ?)
+        INSERT INTO usuario (nome, email, genero, jogador, posicao, clube, senha)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
     `;
     console.log("Executando SQL: \n" + instrucaoSql);
-    return database.executar(instrucaoSql, [nome, email, genero, senha]);
+    return database.executar(instrucaoSql, [nome, email, genero, jogador, posicao, clube, senha]);
+}
+
+function buscarPorEmail(email) {
+    var instrucaoSql = `
+        SELECT nome, email, genero, jogador, posicao, clube
+        FROM usuario
+        WHERE email = ?
+    `;
+    return database.executar(instrucaoSql, [email]);
 }
 
 module.exports = {
     autenticar,
-    cadastrar
+    cadastrar,
+    buscarPorEmail
 }
