@@ -6,6 +6,9 @@ create table usuario (
     nome varchar(100) not null,
     email varchar(100) not null unique,
     genero varchar(30) not null,
+     jogador varchar(100) not null,
+    posicao varchar(50) not null,
+    clube varchar(100) not null,
     senha varchar(100) not null
 );
 
@@ -85,3 +88,5 @@ UPDATE dashboard SET posicao = 'Ponta Esquerda' WHERE ano = 2017;
 UPDATE dashboard SET posicao = 'Centroavante' WHERE ano = 2019;
 UPDATE dashboard SET posicao = 'Centroavante' WHERE ano = 2022;
 UPDATE dashboard SET posicao = 'Centroavante' WHERE ano = 2025;
+
+update dashboard set velocidade = 78 where fk_clube = 6;
