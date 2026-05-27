@@ -19,6 +19,8 @@
 
             <button class="btn-desempenho" onclick="desempenho()">Desempenho</button>
 
+            <button class="btn-perfil" onclick="perfil()">Perfil</button>
+
             <button class="btn-sair" onclick="logout()">Sair</button>
         </div>
     </div>
@@ -441,6 +443,22 @@
         </div>
 
         <div class="card">
+            <h3>1X CAMPEÃO DA ARÁBIA SAUDITA</h3>
+
+            <div class="conteudo">
+                <div class="imagem">
+                    <img src="./assets/img/arabao.png">
+                </div>
+
+                <div class="lista">
+                    <div class="linha"><span>25/26</span><img src="./assets/img/alnassr.png">
+                        <p>Al-Nassr FC</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
             <h3>1X SUPERTAÇA DE PORTUGAL</h3>
 
             <div class="conteudo">
@@ -477,6 +495,10 @@
 
     function atributos() {
     location.href = "./dashboard/dashboard.html";
+}
+
+function perfil() {
+    location.href = "telaperfil.html";
 }
 
 </script>
